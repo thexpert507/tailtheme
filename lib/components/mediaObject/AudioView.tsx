@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
-import { ViewProps } from "./FileViewer";
 import { BsFillMusicPlayerFill } from "react-icons/bs";
 import { MdPlayCircle, MdPauseCircle } from "react-icons/md";
 import { Slider } from "./Slider";
 import { format, toDate, secondsToMilliseconds } from "date-fns";
+import { useMediaContext } from "./mediaContext";
 
-export const AudioView = ({ src }: ViewProps) => {
+export const AudioView = () => {
+  const { src } = useMediaContext();
   const audio = useMemo(() => new Audio(src), [src]);
   const [played, setPlayed] = useState(false);
   const [duration, setDuration] = useState(audio.duration === Infinity ? 0 : audio.duration);

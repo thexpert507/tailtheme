@@ -19,15 +19,17 @@ interface CardProps {
   marginAuto?: boolean;
   footer?: React.ReactNode;
   actions?: React.ReactNode;
+  onClick?: () => void;
 }
 export function Card(props: CardProps) {
   return (
     <div
+      onClick={props.onClick}
       className={twMerge(
         "flex flex-col max-w-md rounded-lg bg-white dark:bg-black shadow shrink-0",
-        props.marginAuto && "mx-auto"
-      )}
-    >
+        props.marginAuto && "mx-auto",
+        props.onClick && "cursor-pointer"
+      )}>
       {props?.image && (
         <FileViewer src={props.image.src} filename={props.image.mimeType}></FileViewer>
       )}
@@ -39,8 +41,7 @@ export function Card(props: CardProps) {
         className={twMerge(
           "flex flex-col justify-items-start h-full",
           !props.icon && !props.header ? "p-4 m-0" : "p-4 pt-0 m-0"
-        )}
-      >
+        )}>
         {props?.metadata && (
           <p className="mb-1 text-sm text-primary-500 truncate">
             {props?.metadata?.author}
@@ -57,15 +58,16 @@ export function Card(props: CardProps) {
           </h3>
         )}
         {props?.paragraph && (
-          <p className="mt-1 text-gray-500 dark:text-gray-400 justify-self-end truncate">{props.paragraph}</p>
+          <p className="mt-1 text-gray-500 dark:text-gray-400 justify-self-end truncate">
+            {props.paragraph}
+          </p>
         )}
         {props?.tags && (
           <div className="py-4 flex flex-wrap gap-2">
             {props.tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600"
-              >
+                className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600">
                 {tag}
               </span>
             ))}

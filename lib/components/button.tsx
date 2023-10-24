@@ -75,6 +75,8 @@ interface ButtonProps {
   fullWidth?: boolean;
   tooltip?: TooltipProps;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  preventDefault?: boolean;
+  stopPropagation?: boolean;
 }
 export function Button(props: ButtonProps) {
   const buttonRef = useRef(null);
@@ -83,7 +85,11 @@ export function Button(props: ButtonProps) {
       ref={buttonRef}
       disabled={props.disabled}
       type={props.type ?? "button"}
-      onClick={props.onClick}
+      onClick={(e) => {
+        props.preventDefault && e.preventDefault();
+        props.stopPropagation && e.stopPropagation();
+        props.onClick && props.onClick(e);
+      }}
       className={twMerge(
         "relative border text-center font-medium text-gray-700 transition-all focus:ring disabled:cursor-not-allowed flex items-center justify-center gap-2",
         props.round ? ROUNDED[props.round] : ROUNDED.none,

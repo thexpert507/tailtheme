@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useRef } from "react";
-import { ViewProps } from "./FileViewer";
+import { useMediaContext } from "./mediaContext";
 
-export const TxtView = ({ src }: ViewProps) => {
+export const TxtView = () => {
+  const { src } = useMediaContext();
   const preRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const getText = async () => {
@@ -15,8 +16,7 @@ export const TxtView = ({ src }: ViewProps) => {
     <div className="w-96 flex flex-col items-center justify-around bg-black rounded-t-xl aspect-square">
       <div
         className="text-white w-full h-full p-2 text-justify text-clip inline overflow-y-auto"
-        ref={preRef}
-      ></div>
+        ref={preRef}></div>
     </div>
   );
 };

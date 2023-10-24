@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { ViewProps } from "./FileViewer";
+import { useMediaContext } from "./mediaContext";
 
 class MyConsole {
   constructor() {
@@ -26,7 +26,9 @@ class MyConsole {
   }
 }
 
-export const ScriptView = ({ src }: ViewProps) => {
+export const ScriptView = () => {
+  const { src } = useMediaContext();
+
   const iframRef = useRef<HTMLIFrameElement>(null);
   const [script, setScript] = useState<string>("");
   const [logs, setLogs] = useState<string[]>([]);
@@ -61,16 +63,14 @@ export const ScriptView = ({ src }: ViewProps) => {
       </div>
       <button
         onClick={runScript}
-        className="absolute bottom-2 right-2 px-2 py-1 text-white bg-wiski-brown-500"
-      >
+        className="absolute bottom-2 right-2 px-2 py-1 text-white bg-wiski-brown-500">
         Run
       </button>
       <iframe
         ref={iframRef}
         title="src"
         sandbox="allow-scripts allow-same-origin"
-        className="hidden"
-      ></iframe>
+        className="hidden"></iframe>
     </div>
   );
 };

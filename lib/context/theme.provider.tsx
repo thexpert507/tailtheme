@@ -1,6 +1,3 @@
-// Importar css global
-import "./index.css";
-
 import { ObservableObject } from "@legendapp/state";
 import { useObserve } from "@legendapp/state/react";
 import { usePersistedObservable } from "@legendapp/state/react-hooks/usePersistedObservable";
