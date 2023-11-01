@@ -10,7 +10,7 @@ export function Media() {
           <Title size="xl">3D</Title>
           <FileViewer
             filename="image.glb"
-            src="/media/bottle.glb"
+            src="/media/example.glb"
             round="md"
             size={{ width: 200, height: 200 }}></FileViewer>
         </Box>
@@ -50,7 +50,37 @@ export function Media() {
             round="md"
             size={{ width: 200, height: 200 }}></FileViewer>
         </Box>
+
+        <Box direction="column" items="start">
+          <Title size="xl">HTML</Title>
+          <FileViewer
+            filename="example.html"
+            src="/media/example.html"
+            round="md"
+            size={{ width: 200, height: 200 }}></FileViewer>
+        </Box>
       </Box>
+
+      <div className="my-10"></div>
+
+      <Title size="2xl">Max file size</Title>
+
+      <div onClick={console.log}>
+        <Box gap="2xl" wrap items="start" justify="start">
+          <Box direction="column" items="start">
+            <Title size="xl">10mb</Title>
+            <FileViewer
+              rules={{ maxSize: 10 * 1024 * 1024 }} // 10mb
+              file={{ size: 11 * 1024 * 1024 }}
+              filename="image.glb"
+              src="/media/edmus.glb"
+              round="md"
+              size={{ width: 400, height: 400 }}></FileViewer>
+          </Box>
+        </Box>
+      </div>
+
+      <div className="my-10"></div>
     </Box>
   );
 }

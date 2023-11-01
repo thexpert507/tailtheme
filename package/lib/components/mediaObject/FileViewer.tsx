@@ -1,4 +1,6 @@
 import { VscDebugRestart } from "react-icons/vsc";
+import { SiThreedotjs } from "react-icons/si";
+import { MdOutlineBrokenImage } from "react-icons/md";
 import { AudioView } from "./AudioView";
 import { HtmlView } from "./HtmlView";
 import { PdfView } from "./PdfView";
@@ -9,6 +11,9 @@ import { VideoView } from "./VideoView";
 import { MediaContextProvider, MediaContextState, useMediaContext } from "./mediaContext";
 import { twMerge } from "tailwind-merge";
 import { ROUNDED } from "@theme/utils";
+import { Show, useObservable } from "@legendapp/state/react";
+import { Box, Button } from "..";
+import { format } from "bytes";
 
 interface FileViewerProps extends MediaContextState {
   filename: string;
@@ -60,20 +65,66 @@ export const FileViewer = (props: FileViewerProps) => {
   const extension = filename.split(".").pop()?.toLowerCase() || "";
   const Viewer = viewers[extension];
 
-  return Viewer ? (
+  return Boolean(Viewer) && state.src ? (
     <MediaContextProvider value={state}>
-      <Viewer></Viewer>
+      <MaxFileSize>
+        <Viewer></Viewer>
+      </MaxFileSize>
     </MediaContextProvider>
   ) : (
-    <div className="flex items-center justify-center w-full object-contain aspect-video min-h-[170px] bg-gray-800 dark:bg-black text-white">
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          onClickRetry && onClickRetry();
-        }}>
-        <VscDebugRestart size={25}></VscDebugRestart>
-      </button>
+    <div
+      style={{ ...state.size }}
+      className={twMerge(
+        "flex items-center justify-center bg-gray-100 dark:bg-stone-950",
+        state.round ? ROUNDED[state.round] : ROUNDED.none
+      )}>
+      {!state.src ? (
+        <Button size="xl" round={state.round} variant="text" stopPropagation preventDefault>
+          <MdOutlineBrokenImage size={35} />
+        </Button>
+      ) : (
+        <Button
+          round={state.round}
+          variant="text"
+          stopPropagation
+          preventDefault
+          onClick={onClickRetry}>
+          <VscDebugRestart size={25}></VscDebugRestart>
+        </Button>
+      )}
     </div>
   );
 };
+
+interface MaxFileSizeProps {
+  children: React.ReactNode;
+}
+function MaxFileSize(props: MaxFileSizeProps) {
+  const { file, ...state } = useMediaContext();
+  const show$ = useObservable<boolean>(() =>
+    file?.size ? file?.size < (state.rules?.maxSize || 50 * 1024 * 1024) : true
+  );
+
+  const handleShow = () => show$.set(true);
+
+  return (
+    <Show
+      if={show$}
+      else={
+        <div
+          style={{ ...state.size }}
+          className={twMerge(
+            "w-full h-full bg-gray-100 dark:bg-stone-950",
+            state.round ? ROUNDED[state.round] : ROUNDED.none
+          )}>
+          <Box full height="h-full" items="center" justify="center">
+            <Button stopPropagation onClick={handleShow} variant="contained" round={state.round}>
+              {state.rules?.openButtonText || "Open"} {format(file?.size!)} <SiThreedotjs />
+            </Button>
+          </Box>
+        </div>
+      }>
+      {props.children}
+    </Show>
+  );
+}
