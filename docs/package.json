@@ -10,11 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@legendapp/state": "^1.11.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.11.0",
     "react-router-dom": "^6.17.0",
-    "tailtheme": "workspace:*",
-    "@legendapp/state": "^1.11.3"
+    "tailtheme": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.8.3",

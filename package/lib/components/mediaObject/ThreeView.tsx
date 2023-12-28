@@ -1,28 +1,13 @@
-import { Canvas, Vector3, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, Vector3, useFrame } from "@react-three/fiber";
 import { Fragment, Suspense, useEffect, useRef } from "react";
-import {
-  OrbitControls,
-  PerspectiveCamera,
-  useProgress,
-  Html,
-  PerformanceMonitor,
-  useAspect,
-  CubeCamera,
-} from "@react-three/drei";
+import { OrbitControls, useProgress, Html, PerformanceMonitor } from "@react-three/drei";
 import { Gltf } from "@react-three/drei";
 import { useMediaContext } from "./mediaContext";
 import { twMerge } from "tailwind-merge";
 import { Box, Button } from "..";
 import { VscArrowDown } from "react-icons/vsc";
 import { Memo, useObservable } from "@legendapp/state/react";
-import {
-  Box3,
-  PerspectiveCamera as Camera,
-  Group,
-  Mesh,
-  Object3D,
-  Vector3 as ThreeVector3,
-} from "three";
+import { Box3, PerspectiveCamera as Camera, Group, Object3D } from "three";
 import { ROUNDED } from "@theme/utils";
 import { MediaContextState } from "./mediaContext";
 
@@ -42,14 +27,6 @@ const Model = (props: ModelProps) => {
     if (!ref.current) return;
     ref.current.rotation.y = clock.getElapsedTime() * 0.5;
   });
-
-  const aspect = useAspect(
-    Number(props.size?.width || 200) + 200, // Pixel-width
-    Number(props.size?.height || 200) + 200, // Pixel-height
-    undefined // Optional scaling factor
-  );
-
-  // const { scene } = useThree();
 
   useEffect(() => {
     if (!ref.current) return;
@@ -74,7 +51,6 @@ const Model = (props: ModelProps) => {
     const min = Math.min(...lengthRatios); // Escalar el objeto
     const scalar = min * 0.065;
     obj.scale.set(scalar, scalar, scalar);
-    console.log({ scalar });
 
     obj.translateY(-((bounds.y * scalar) / 2)); // Centrar el objeto
   }, [ref, props.size]);
@@ -130,7 +106,7 @@ export const ThreeView = () => {
             return (
               <Canvas
                 dpr={dpr}
-                frameloop="demand"
+                frameloop="always"
                 className="bg-gray-100 dark:bg-stone-950"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -139,9 +115,9 @@ export const ThreeView = () => {
                 <PerformanceMonitor
                   onIncline={() => state.dpr.set(2)}
                   onDecline={() => state.dpr.set(1)}>
-                  <pointLight position={[-5, 10, -10]} intensity={2} />
+                  <pointLight position={[1, 1, 10]} intensity={10} />
                   <ambientLight></ambientLight>
-                  <directionalLight intensity={2} position={[0, 0, 70]}></directionalLight>
+                  <directionalLight intensity={10} position={[0, 0, 70]}></directionalLight>
                   <Suspense fallback={<Loader />}>
                     <Model src={src} size={size}></Model>
                   </Suspense>

@@ -27,10 +27,7 @@ function ImageView() {
       style={{ ...size }}
       src={src}
       alt="imageView"
-      className={twMerge(
-        "aspect-video w-full object-contain min-h-[170px]",
-        round ? ROUNDED[round] : ROUNDED.none
-      )}
+      className={twMerge("object-contain", round ? ROUNDED[round] : ROUNDED.none)}
     />
   );
 }

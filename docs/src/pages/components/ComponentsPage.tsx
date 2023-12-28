@@ -2,6 +2,7 @@ import { Box, Button, Title } from "tailtheme/components";
 import { Buttons } from "./components/Buttons";
 import { Switch, useObservable } from "@legendapp/state/react";
 import { Media } from "./components/Media";
+import { Avatars, Dropdowns } from "./components";
 
 const ROUTES = [
   {
@@ -9,6 +10,12 @@ const ROUTES = [
   },
   {
     label: "Media",
+  },
+  {
+    label: "Avatares",
+  },
+  {
+    label: "Dropdowns",
   },
 ] as const;
 
@@ -39,6 +46,8 @@ export default function ComponentsPage() {
             {{
               Botones: () => <Buttons />,
               Media: () => <Media />,
+              Avatares: () => <Avatars />,
+              Dropdowns: () => <Dropdowns />,
             }}
           </Switch>
         </Box>
