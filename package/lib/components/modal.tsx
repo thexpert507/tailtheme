@@ -21,7 +21,7 @@ export function Modal(props: ModalProps) {
     <>
       <div
         className={twMerge(
-          "inset-0 z-10 bg-secondary-700/50",
+          "inset-0 z-50 backdrop-blur-sm transition-all duration-150",
           !props.open ? "hidden" : "fixed"
         )}></div>
       <div
@@ -31,7 +31,7 @@ export function Modal(props: ModalProps) {
         )}>
         <div
           className={twMerge(
-            "mx-auto overflow-hidden rounded-lg bg-white dark:bg-stone-900 shadow-xl dark:shadow-gray-700 sm:w-full max-h-[calc(100vh_-_2rem)] overflow-y-auto",
+            "mx-auto overflow-hidden rounded-lg bg-background-primary border border-background-secondary shadow-xl sm:w-full max-h-[calc(100vh_-_2rem)] overflow-y-auto",
             props.size ? MODAL_SIZES[props.size] : MODAL_SIZES.xl
           )}>
           <div className="relative p-6">
@@ -41,7 +41,7 @@ export function Modal(props: ModalProps) {
                 e.stopPropagation();
                 props.onClose();
               }}
-              className="absolute top-4 right-4 rounded-lg p-1 text-center font-medium text-secondary-500 dark:text-secondary-100 transition-all hover:bg-secondary-100 dark:hover:text-secondary-900">
+              className="absolute top-4 right-4 rounded-lg p-1 text-center font-medium text-background-contrast transition-all hover:bg-background-secondary">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
@@ -51,11 +51,9 @@ export function Modal(props: ModalProps) {
               </svg>
             </button>
             {props.title && (
-              <h3 className="text-lg font-medium text-secondary-900 dark:text-secondary-100">
-                {props.title}
-              </h3>
+              <h3 className="text-lg font-medium text-background-contrast">{props.title}</h3>
             )}
-            <div className="mt-2 dark:text-gray-100">{props.children}</div>
+            <div className="mt-2 text-background-contrast">{props.children}</div>
           </div>
 
           {(props.enableCancel || props.enableConfirm) && (
@@ -66,7 +64,7 @@ export function Modal(props: ModalProps) {
                   stopPropagation
                   onClick={props.onCancel}
                   variant="contained"
-                  color="gray"
+                  color="accent"
                   round="md">
                   {props.cancelText || "Cancel"}
                 </Button>

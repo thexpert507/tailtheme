@@ -62,7 +62,7 @@ export function Dropdown(props: DropdownProps) {
           right: position.right,
         }}
         className={twMerge(
-          "fixed z-50 mt-2 rounded-lg border border-gray-100 bg-white text-left text-sm shadow-lg",
+          "fixed z-50 mt-2 rounded-lg border border-neutral-primary bg-background-primary text-left text-sm shadow-lg",
           isOpen ? "block" : "hidden",
           props.width ? props.width : "w-60"
         )}>
@@ -74,7 +74,7 @@ export function Dropdown(props: DropdownProps) {
               <div key={index} className="p-1">
                 <div
                   onClick={option.onClick}
-                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
+                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-background-contrast hover:bg-primary hover:text-primary-contrast cursor-pointer">
                   {option.icon}
                   <span>{option.label}</span>
                 </div>

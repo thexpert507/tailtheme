@@ -41,37 +41,37 @@ export function Table({
     <div
       ref={ref}
       className={twMerge(
-        "border dark:border-gray-700",
+        "border",
         height && twMerge("overflow-y-scroll", height),
         width && twMerge("overflow-x-scroll", width),
-        bordered && "border-gray-200 dark:border-gray-700",
+        bordered && "border-background-secondary",
         round && ROUNDED[round],
         shadow && SHADOW[shadow]
       )}>
-      <table className="w-full h-full border-collapse bg-white dark:bg-stone-900/70 text-left text-sm text-gray-500 dark:text-gray-100">
-        <thead className="bg-gray-50 dark:bg-stone-900">
+      <table className="w-full h-full border-collapse bg-background-primary text-left text-sm text-background-contrast">
+        <thead className="bg-background-secondary">
           <tr>
             {Array.isArray(headers) ? (
               headers.map((header, index) => (
                 <th
                   key={index}
                   scope="col"
-                  className="px-6 py-4 font-medium text-gray-900 dark:text-gray-100">
+                  className="px-6 py-4 font-medium text-background-contrast">
                   {header}
                 </th>
               ))
             ) : (
-              <th className="px-6 py-4 font-medium text-gray-900 dark:text-gray-100">{headers}</th>
+              <th className="px-6 py-4 font-medium text-background-contrast">{headers}</th>
             )}
           </tr>
         </thead>
         <tbody
           className={twMerge(
-            "divide-y divide-gray-100 dark:divide-gray-700 border-t border-gray-100 dark:border-gray-700",
+            "divide-y divide-background-secondary border-t border-background-secondary",
             props.bodyHeight && twMerge("overflow-y-scroll", props.bodyHeight)
           )}>
           {items?.map((item, index) => (
-            <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-900">
+            <tr key={index} className="hover:bg-background-secondary">
               {item.map((td, index) => (
                 <td key={index} className="px-6 py-4">
                   {td}
@@ -97,7 +97,7 @@ export function TableRow({ children, onClick }: TableRowProps) {
         e.stopPropagation();
         onClick && onClick();
       }}
-      className="hover:bg-gray-50 dark:hover:bg-gray-900">
+      className="hover:bg-background-secondary">
       {Array.isArray(children) ? (
         children.map((td, index) => (
           <td key={index} className="px-6 py-4">

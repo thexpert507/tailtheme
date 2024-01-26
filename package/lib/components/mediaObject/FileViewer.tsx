@@ -72,7 +72,7 @@ export const FileViewer = (props: FileViewerProps) => {
     <div
       style={{ ...state.size }}
       className={twMerge(
-        "flex items-center justify-center bg-gray-100 dark:bg-stone-950",
+        "flex items-center justify-center bg-background-secondary",
         state.round ? ROUNDED[state.round] : ROUNDED.none
       )}>
       {!state.src ? (
@@ -111,7 +111,7 @@ function MaxFileSize(props: MaxFileSizeProps) {
         <div
           style={{ ...state.size }}
           className={twMerge(
-            "w-full h-full bg-gray-100 dark:bg-stone-950",
+            "w-full h-full bg-background-secondary",
             state.round ? ROUNDED[state.round] : ROUNDED.none
           )}>
           <Box full height="h-full" items="center" justify="center">

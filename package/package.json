@@ -1,7 +1,7 @@
 {
   "name": "tailtheme",
   "private": false,
-  "version": "1.0.22",
+  "version": "1.1.7",
   "type": "module",
   "license": "Apache-2.0",
   "access": "public",
@@ -29,6 +29,11 @@
       "import": "./dist/utils.es.js",
       "require": "./dist/utils.cjs.js",
       "types": "./dist/utils/index.d.ts"
+    },
+    "./config": {
+      "import": "./dist/config.es.js",
+      "require": "./dist/config.cjs.js",
+      "types": "./dist/config/index.d.ts"
     }
   },
   "typesVersions": {
@@ -44,6 +49,9 @@
       ],
       "utils": [
         "./dist/utils/index.d.ts"
+      ],
+      "config": [
+        "./dist/config/index.d.ts"
       ]
     }
   },

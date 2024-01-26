@@ -2,7 +2,7 @@ import { Box, Button, Title } from "tailtheme/components";
 import { Buttons } from "./components/Buttons";
 import { Switch, useObservable } from "@legendapp/state/react";
 import { Media } from "./components/Media";
-import { Avatars, Dropdowns } from "./components";
+import { Avatars, Badges, Cards, Dropdowns, Inputs, Modals, Tables } from "./components";
 
 const ROUTES = [
   {
@@ -16,6 +16,21 @@ const ROUTES = [
   },
   {
     label: "Dropdowns",
+  },
+  {
+    label: "Inputs",
+  },
+  {
+    label: "Badges",
+  },
+  {
+    label: "Cards",
+  },
+  {
+    label: "Modals",
+  },
+  {
+    label: "Tablas",
   },
 ] as const;
 
@@ -48,6 +63,11 @@ export default function ComponentsPage() {
               Media: () => <Media />,
               Avatares: () => <Avatars />,
               Dropdowns: () => <Dropdowns />,
+              Inputs: () => <Inputs />,
+              Badges: () => <Badges />,
+              Cards: () => <Cards />,
+              Modals: () => <Modals />,
+              Tablas: () => <Tables />,
             }}
           </Switch>
         </Box>

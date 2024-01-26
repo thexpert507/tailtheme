@@ -1,47 +1,47 @@
-import { ROUNDED, TooltipPlacement } from "@theme/utils";
+import { ROUNDED, TooltipPlacement, COLORS } from "@theme/utils";
 import { twMerge } from "tailwind-merge";
 import { MouseEvent, useRef } from "react";
 import { Tooltip } from "./tooltip";
 
-const TEXT_COLORS = {
-  primary: "text-primary-600 dark:text-primary-600/80",
-  green: "text-green-600 dark:text-green-600/80",
-  yellow: "text-yellow-600 dark:text-yellow-600/80",
-  red: "text-red-600 dark:text-red-600/80",
-  violet: "text-violet-600 dark:text-violet-600/80",
-  gray: "text-gray-600 dark:text-gray-600/80",
+const TEXT_COLORS: Record<COLORS, string> = {
+  primary: "text-primary",
+  accent: "text-accent",
+  warning: "text-warning",
+  danger: "text-danger",
+  info: "text-info",
+  success: "text-success",
 };
 
-const BORDER_COLORS = {
-  primary:
-    "border-primary-500 dark:border-primary-500/80 focus:ring-primary-100 dark:focus:ring-primary-100/40",
-  green:
+const BORDER_COLORS: Record<COLORS, string> = {
+  primary: "border-primary focus:ring-primary-focus",
+  accent:
     "border-green-500 dark:border-green-500/80 focus:ring-green-100 dark:focus:ring-green-100/40",
-  yellow:
+  warning:
     "border-yellow-500 dark:border-yellow-500/80 focus:ring-yellow-100 dark:focus:ring-yellow-100/40",
-  red: "border-red-500 dark:border-red-500/80 focus:ring-red-100 dark:focus:ring-red-100/40",
-  violet:
-    "border-violet-500 dark:border-violet-500/80 focus:ring-violet-100 dark:focus:ring-violet-100/40",
-  gray: "border-gray-500 dark:border-gray-500/80 focus:ring-gray-100 dark:focus:ring-gray-100/40",
+  danger: "border-red-500 dark:border-red-500/80 focus:ring-red-100 dark:focus:ring-red-100/40",
+  info: "border-violet-500 dark:border-violet-500/80 focus:ring-violet-100 dark:focus:ring-violet-100/40",
+  success:
+    "border-gray-500 dark:border-gray-500/80 focus:ring-gray-100 dark:focus:ring-gray-100/40",
 };
 
-const colors = {
+const colors: Record<COLORS, string> = {
   primary:
-    "bg-primary-500 dark:bg-primary-500/80 text-white hover:bg-primary-700 dark:hover:bg-primary-700/80 focus:ring focus:ring-primary-200 disabled:cursor-not-allowed disabled:border-primary-300 disabled:bg-primary-300",
-  green:
-    "bg-green-500 dark:bg-green-500/80 text-white hover:bg-green-700 focus:ring focus:ring-green-200 disabled:cursor-not-allowed disabled:border-green-300 disabled:bg-green-300",
-  yellow:
-    "bg-yellow-500 dark:bg-yellow-500/80 text-white hover:bg-yellow-700 focus:ring focus:ring-yellow-200 disabled:cursor-not-allowed disabled:border-yellow-300 disabled:bg-yellow-300",
-  red: "bg-red-500 dark:bg-red-500/80 text-white hover:bg-red-700 focus:ring focus:ring-red-200 disabled:cursor-not-allowed disabled:border-red-300 disabled:bg-red-300",
-  violet:
-    "bg-violet-500 dark:bg-violet-500/80 text-white hover:bg-violet-700 focus:ring focus:ring-violet-200 disabled:cursor-not-allowed disabled:border-violet-300 disabled:bg-violet-300",
-  gray: "bg-gray-700 dark:bg-stone-700/80 text-white hover:bg-gray-900 focus:ring focus:ring-gray-200 disabled:cursor-not-allowed disabled:border-gray-300 disabled:bg-gray-300",
+    "bg-primary text-primary-contrast hover:bg-primary-hover focus:ring disabled:cursor-not-allowed disabled:border-primary-disabled disabled:bg-primary-disabled",
+  accent:
+    "bg-accent text-accent-contrast hover:bg-accent-hover focus:ring focus:ring-accent-focus disabled:cursor-not-allowed disabled:border-accent-disabled disabled:bg-accent-disabled",
+  warning:
+    "bg-warning text-warning-contrast hover:bg-warning-hover focus:ring focus:ring-warning-focus disabled:cursor-not-allowed disabled:border-warning-disabled disabled:bg-warning-disabled",
+  danger:
+    "bg-danger text-danger-contrast hover:bg-danger-hover focus:ring focus:ring-danger-focus disabled:cursor-not-allowed disabled:border-danger-disabled disabled:bg-danger-disabled",
+  info: "bg-info text-info-contrast hover:bg-info-hover focus:ring focus:ring-info-hover disabled:cursor-not-allowed disabled:border-info-disabled disabled:bg-info-disabled",
+  success:
+    "bg-success text-success-contrast hover:bg-success-hover focus:ring focus:ring-success-focus disabled:cursor-not-allowed disabled:border-success-disabled disabled:bg-success-disabled",
 };
 
-function Variant(color: keyof typeof colors) {
+function Variant(color: COLORS) {
   return {
-    text: "text-gray-700 dark:text-gray-100 border-transparent bg-transparent shadow-none",
-    outlined: `bg-white dark:bg-stone-900 ${TEXT_COLORS[color]} ${BORDER_COLORS[color]} `,
+    text: "text-background-contrast border-transparent ring-transparent bg-background-primary shadow-none",
+    outlined: `bg-transparent ${TEXT_COLORS[color]} ${BORDER_COLORS[color]} `,
     contained: `border border-transparent ${colors[color]}`,
     grouped: `border-none border-transparent bg-transparent shadow-none`,
   };
@@ -67,7 +67,7 @@ type TooltipProps = {
 interface ButtonProps {
   children?: React.ReactNode;
   round?: keyof typeof ROUNDED;
-  color?: keyof typeof colors;
+  color?: COLORS;
   variant?: variants;
   size?: keyof typeof sizes;
   disabled?: boolean;
@@ -91,7 +91,7 @@ export function Button(props: ButtonProps) {
         props.onClick && props.onClick(e);
       }}
       className={twMerge(
-        "relative border text-center font-medium text-gray-700 dark:text-gray-100 transition-all focus:ring disabled:cursor-not-allowed flex items-center justify-center gap-2",
+        "relative border text-center font-medium transition-all focus:ring disabled:cursor-not-allowed flex items-center justify-center gap-2",
         props.round ? ROUNDED[props.round] : ROUNDED.none,
         props.variant && Variant(props.color ?? "primary")[props.variant],
         props.size ? sizes[props.size] : sizes.md,

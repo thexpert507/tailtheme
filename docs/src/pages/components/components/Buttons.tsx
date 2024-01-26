@@ -1,6 +1,8 @@
 import { Box, Button, Title } from "tailtheme/components";
 
 export function Buttons() {
+  const colors = ["primary", "accent", "danger", "warning", "success", "info"] as const;
+
   return (
     <Box flat full items="start" justify="start" direction="column">
       <Title size="2xl">Botones</Title>
@@ -11,7 +13,6 @@ export function Buttons() {
           <Button color="primary" variant="text">
             Text
           </Button>
-          <Button color="primary">Base</Button>
           <Button color="primary" variant="outlined">
             Outlined
           </Button>
@@ -60,24 +61,15 @@ export function Buttons() {
       <Box direction="column" items="start">
         <Title size="xl">Colores</Title>
         <Box>
-          <Button color="primary" variant="contained">
-            Primary
-          </Button>
-          <Button color="gray" variant="contained">
-            Gray
-          </Button>
-          <Button color="red" variant="contained">
-            Red
-          </Button>
-          <Button color="yellow" variant="contained">
-            Yellow
-          </Button>
-          <Button color="green" variant="contained">
-            Green
-          </Button>
-          <Button color="violet" variant="contained">
-            Violet
-          </Button>
+          {colors.map((color) => (
+            <Button
+              color={color}
+              variant="contained"
+              key={color}
+              tooltip={{ placement: "bottom", children: color }}>
+              {color}
+            </Button>
+          ))}
         </Box>
       </Box>
 

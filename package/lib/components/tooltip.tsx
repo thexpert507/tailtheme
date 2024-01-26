@@ -67,7 +67,7 @@ export function Tooltip(props: TooltipProps) {
             ref={tooltipDivRef}
             style={styles$.get()}
             className={twMerge(
-              "opacity-0 fixed z-[9999] bg-gray-100 dark:bg-stone-700 shadow dark:shadow-stone-800 text-gray-900 dark:text-gray-100 whitespace-nowrap rounded-md",
+              "opacity-0 fixed z-[9999] bg-background-secondary shadow text-background-contrast whitespace-nowrap rounded-md",
               isHovered$.get() && "opacity-100"
             )}
           >

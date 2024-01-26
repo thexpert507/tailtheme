@@ -94,7 +94,7 @@ export const ThreeView = () => {
   return (
     <div
       className={twMerge(
-        "flex flex-col items-center justify-around bg-gray-100 dark:bg-stone-950 overflow-hidden",
+        "flex flex-col items-center justify-around bg-background-secondary overflow-hidden",
         !size ? "absolute top-0 left-0 right-0 bottom-0" : "relative",
         round ? ROUNDED[round] : ROUNDED.none
       )}
@@ -107,7 +107,7 @@ export const ThreeView = () => {
               <Canvas
                 dpr={dpr}
                 frameloop="always"
-                className="bg-gray-100 dark:bg-stone-950"
+                className="bg-background-secondary"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}

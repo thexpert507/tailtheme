@@ -24,8 +24,8 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, re
           <label
             htmlFor={id}
             className={twMerge(
-              "mb-1 block text-sm font-medium text-gray-700 dark:text-gray-300",
-              props.error && "after:ml-0.5 after:text-red-500 after:content-['*']"
+              "mb-1 block text-sm font-medium text-background-contrast",
+              props.error && "after:ml-0.5 after:text-danger after:content-['*']"
             )}>
             {props.title}
           </label>
@@ -34,7 +34,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, re
               onClick={() => {
                 props.onClose && props.onClose();
               }}
-              className="text-red-500 cursor-pointer"></BsTrashFill>
+              className="text-danger cursor-pointer"></BsTrashFill>
           )}
         </Box>
       )}
@@ -46,9 +46,10 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, re
         )}
         <input
           className={twMerge(
+            "text-background-contrast",
             props.rightIcon && "pr-10",
             props.leftIcon && "pl-10",
-            "block w-full rounded-md dark:bg-stone-900 dark:text-gray-100 dark:autofill:bg-gray-900 border-gray-300 shadow-sm focus:border-primary-400 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500"
+            "block w-full rounded-md bg-background-primary border-primary shadow-sm focus:border-primary-focus focus:ring focus:ring-primary-focus focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-primary-disabled disabled:text-primary-disabled"
           )}
           {...others}
           id={id}
@@ -61,7 +62,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, re
           </div>
         )}
       </div>
-      {props.error && <p className="mt-1 text-sm text-red-500">{props.error}</p>}
+      {props.error && <p className="mt-1 text-sm text-danger">{props.error}</p>}
     </Box>
   );
 });

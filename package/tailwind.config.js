@@ -12,8 +12,16 @@ export default {
       },
 
       colors: {
-        primary: colors.blue,
-        secondary: colors.slate,
+        primary: "var(--color-primary)",
+        accent: "var(--color-accent)",
+        info: "var(--color-info)",
+        success: "var(--color-success)",
+        warning: "var(--color-warning)",
+        danger: "var(--color-danger)",
+        "neutral-primary": "var(--color-neutral-primary)",
+        "neutral-secondary": "var(--color-neutral-secondary)",
+        "neutral-tertiary": "var(--color-neutral-tertiary)",
+        "neutral-quaternary": "var(--color-neutral-quaternary)",
       },
     },
   },

@@ -7,6 +7,8 @@ import {
   PADDING_X,
   PADDING_Y,
   SHADOW,
+  BACKGROUND_COLORS,
+  ROUNDED
 } from "@theme/utils";
 import { twMerge } from "tailwind-merge";
 
@@ -27,6 +29,8 @@ interface BoxProps {
   paddingY?: keyof typeof PADDING_Y;
   height?: string;
   width?: string;
+  bg?: keyof typeof BACKGROUND_COLORS;
+  round?: keyof typeof ROUNDED;
 }
 export function Box(props: BoxProps) {
   return (
@@ -47,7 +51,9 @@ export function Box(props: BoxProps) {
         props.paddingX ? PADDING_X[props.paddingX] : PADDING_X.none,
         props.paddingY ? PADDING_Y[props.paddingY] : PADDING_Y.none,
         props.height ? `${props.height} overflow-auto` : "h-auto",
-        props.width && `${props.width} overflow-auto`
+        props.width && `${props.width} overflow-auto`,
+        props.bg && BACKGROUND_COLORS[props.bg],
+        props.round ? ROUNDED[props.round] : ROUNDED.none
       )}>
       {props.children}
     </div>

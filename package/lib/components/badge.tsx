@@ -1,13 +1,13 @@
-import { ROUNDED } from "@theme/utils";
+import { COLORS, ROUNDED } from "@theme/utils";
 import { twMerge } from "tailwind-merge";
 
-const colors = {
-  primary: "bg-primary-50 dark:bg-primary-800/40 text-primary-600 dark:text-primary-400",
-  green: "bg-green-50 text-green-600 dark:text-green-400 dark:bg-green-800/40",
-  yellow: "bg-yellow-50 text-yellow-600 dark:text-yellow-400 dark:bg-yellow-800/40",
-  red: "bg-red-50 text-red-600 dark:text-red-400 dark:bg-red-800/40",
-  gray: "bg-gray-100 text-gray-600 dark:text-gray-400 dark:bg-stone-900/40",
-  black: "bg-black text-white dark:bg-white dark:text-black/40",
+const colors: Record<COLORS, string> = {
+  primary: "bg-primary text-primary-contrast",
+  accent: "bg-accent text-accent-contrast",
+  success: "bg-success text-success-contrast",
+  warning: "bg-warning text-warning-contrast",
+  danger: "bg-danger text-danger-contrast",
+  info: "bg-info text-info-contrast",
 };
 
 interface BadgeProps {

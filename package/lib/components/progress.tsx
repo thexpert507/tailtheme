@@ -1,12 +1,13 @@
+import { COLORS } from "@theme/utils";
 import { twMerge } from "tailwind-merge";
 
-const colors = {
-  primary: "bg-primary-500 dark:bg-primary-500/80",
-  green: "bg-green-500 dark:bg-green-500/80",
-  yellow: "bg-yellow-500 dark:bg-yellow-500/80",
-  red: "bg-red-500 dark:bg-red-500/80",
-  violet: "bg-violet-500 dark:bg-violet-500/80",
-  gray: "bg-gray-700 dark:bg-gray-700/80",
+const colors: Record<COLORS, string> = {
+  primary: "bg-primary",
+  accent: "bg-accent",
+  danger: "bg-danger",
+  info: "bg-info",
+  success: "bg-success",
+  warning: "bg-warning",
 };
 
 const sizes = {
@@ -35,10 +36,9 @@ export function Progress(props: ProgressProps) {
   const baseJSX = (
     <div
       className={twMerge(
-        "relative flex w-full overflow-hidden rounded-full bg-secondary-200 dark:bg-transparent",
+        "relative flex w-full overflow-hidden rounded-full bg-background-primary dark:bg-transparent",
         props.size ? sizes[props.size] : sizes.md
-      )}
-    >
+      )}>
       <div
         role="progressbar"
         aria-valuenow={props.percentage}
@@ -47,8 +47,10 @@ export function Progress(props: ProgressProps) {
         style={{
           width: props.percentage + "%",
         }}
-        className={twMerge("flex h-full bg-transparent", props.color ? colors[props.color] : colors.primary)}
-      ></div>
+        className={twMerge(
+          "flex h-full bg-transparent",
+          props.color ? colors[props.color] : colors.primary
+        )}></div>
     </div>
   );
 
@@ -58,22 +60,20 @@ export function Progress(props: ProgressProps) {
         <dl className="flex items-center justify-between">
           <dt
             className={twMerge(
-              "text-secondary-700 dark:text-gray-100",
+              "text-background-contrast",
               props.size && !props.labelSize ? labelSizes[props.size] : labelSizes.md,
               props.labelSize ? labelSizes[props.labelSize] : labelSizes.md
-            )}
-          >
+            )}>
             {props.label}
           </dt>
           {props.showPercentage && (
             <dd
               className={twMerge(
-                "text-secondary-500 dark:text-gray-100",
+                "text-background-contrast",
                 props.size && !props.labelSize ? labelSizes[props.size] : labelSizes.md,
                 props.labelSize ? labelSizes[props.labelSize] : labelSizes.md
-              )}
-            >
-              {props.percentage}%
+              )}>
+              {props.percentage.toFixed(0)}%
             </dd>
           )}
         </dl>

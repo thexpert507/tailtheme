@@ -13,16 +13,13 @@ export const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>((
   return (
     <Box full flat direction="column" items="start" marginX={props.marginX} marginY={props.marginY}>
       {props.title && (
-        <label
-          htmlFor={id}
-          className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-100"
-        >
+        <label htmlFor={id} className="mb-1 block text-sm font-medium text-background-contrast">
           {props.title}
         </label>
       )}
       <textarea
         id={id}
-        className="block w-full rounded-md dark:bg-stone-900 dark:text-gray-100 dark:autofill:bg-gray-900 border-gray-300 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50"
+        className="block w-full bg-background-primary rounded-md border-primary shadow-sm focus:border-primary-focus focus:ring focus:ring-primary-focus focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-primary-disabled text-background-contrast"
         placeholder="Leave a message"
         {...props}
         ref={ref}

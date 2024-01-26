@@ -32,8 +32,7 @@ export const FormSelect = <T extends FieldValues>(props: FormSelectProps<T>) => 
       {props.title && (
         <label
           htmlFor={id}
-          className="w-full mb-1 block text-sm font-medium text-gray-700 after:text-red-500 after:content-['*']"
-        >
+          className="w-full mb-1 block text-sm font-medium text-background-contrast after:text-danger after:content-['*']">
           {props.title}
         </label>
       )}
@@ -47,8 +46,7 @@ export const FormSelect = <T extends FieldValues>(props: FormSelectProps<T>) => 
           onChange={(e) => {
             props.onChange(e.target.value);
           }}
-          className="block w-full rounded-md dark:bg-stone-700 dark:text-gray-100 border-gray-300 shadow-sm focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-gray-50"
-        >
+          className="block w-full rounded-md bg-background-primary text-background-contrast border-primary shadow-sm focus:border-primary-focus focus:ring focus:ring-primary-focus disabled:cursor-not-allowed disabled:bg-primary-disabled">
           {props.items.map((item) => {
             return (
               <option key={item.value} value={item.value}>
@@ -75,14 +73,12 @@ export const FormSelect = <T extends FieldValues>(props: FormSelectProps<T>) => 
                 onChange={(e) => {
                   field.onChange(e[0].value);
                 }}
-                options={props.options}
-              ></Select>
+                options={props.options}></Select>
             );
-          }}
-        ></Controller>
+          }}></Controller>
       )}
 
-      {props.help && <p className="mt-1 text-sm text-gray-500">{props.help}</p>}
+      {props.help && <p className="mt-1 text-sm text-background-contrast">{props.help}</p>}
     </Box>
   );
 };

@@ -13,9 +13,9 @@ export const TxtView = () => {
     getText();
   }, [src]);
   return (
-    <div className="w-96 flex flex-col items-center justify-around bg-black rounded-t-xl aspect-square">
+    <div className="w-96 flex flex-col items-center justify-around bg-background-secondary rounded-t-xl aspect-square">
       <div
-        className="text-white w-full h-full p-2 text-justify text-clip inline overflow-y-auto"
+        className="text-background-contrast w-full h-full p-2 text-justify text-clip inline overflow-y-auto"
         ref={preRef}></div>
     </div>
   );

@@ -43,17 +43,17 @@ export const AudioView = () => {
     <div
       style={{ ...size }}
       className={twMerge(
-        "w-full min-h-[10rem] flex flex-col items-center justify-around bg-gray-100 dark:bg-stone-950 aspect-square overflow-hidden",
+        "w-full min-h-[10rem] flex flex-col items-center justify-around bg-background-secondary aspect-square overflow-hidden",
         props.round ? ROUNDED[props.round] : ROUNDED.none
       )}>
       <Box shrink>
-        <LuFileAudio size={30} className="dark:stroke-gray-100 " />
+        <LuFileAudio size={30} className="text-background-contrast" />
       </Box>
       <Box direction="column" full paddingX="md" shrink>
         <Progress size="md" percentage={time}></Progress>
 
         <Box flat shrink>
-          <span className="text-gray-800 dark:text-gray-100 w-10 mx-3">
+          <span className="text-background-contrast w-10 mx-3">
             {format(toDate(secondsToMilliseconds(time || 0)), "mm:ss")}
           </span>
           <Button
@@ -66,7 +66,7 @@ export const AudioView = () => {
             round="full">
             {!played ? <VscPlay size={20} /> : <VscDebugPause size={20} />}
           </Button>
-          <span className="text-gray-800 dark:text-gray-100 w-10 mx-3">
+          <span className="text-background-contrast w-10 mx-3">
             {format(toDate(secondsToMilliseconds(duration || 0)), "mm:ss")}
           </span>
         </Box>

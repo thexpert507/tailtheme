@@ -14,17 +14,15 @@ export function Nav({ children }: NavProps) {
     <>
       <header
         className={twMerge(
-          "hidden md:block backdrop-blur bg-white/60 shadow-sm absolute top-0 left-0 right-0 z-50 py-4 md:fixed md:transition-all",
-          "dark:bg-stone-900"
-        )}
-      >
+          "hidden md:block backdrop-blur bg-background-primary shadow-sm absolute top-0 left-0 right-0 z-50 py-4 md:fixed"
+        )}>
         <div className="mx-auto max-w-8xl justify-between px-4 flex">
-          <nav className="w-full fixed inset-x-0 bottom-0 top-14 hidden items-center gap-8 bg-white px-6 text-secondary-700 md:static md:flex md:bg-transparent md:p-0 h-screen md:h-auto">
+          <nav className="w-full fixed inset-x-0 bottom-0 top-14 hidden bg-background-primary items-center gap-8 px-6 text-background-contrast md:static md:flex md:bg-transparent md:p-0 h-screen md:h-auto">
             {children}
           </nav>
         </div>
       </header>
-      <div className="h-16 md:h-0 dark:bg-stone-900"></div>
+      <div className="h-16 md:h-0"></div>
     </>
   );
 }
@@ -52,10 +50,9 @@ export function NavItem({ children, onClick, active }: NavItemProps) {
       <button
         onClick={onClick}
         className={twMerge(
-          "block hover:text-blue-500 cursor-pointer dark:text-gray-100 whitespace-nowrap",
-          active && "text-blue-500"
-        )}
-      >
+          "block hover:text-primary cursor-pointer whitespace-nowrap",
+          active && "text-primary"
+        )}>
         {children}
       </button>
     </li>
@@ -75,10 +72,9 @@ export function MobileNav({ children, brand, darkThemeSwitch, paddingY }: Mobile
   return (
     <header
       className={twMerge(
-        "backdrop-blur dark:bg-stone-900 bg-white/60 shadow-sm fixed top-0 left-0 right-0 z-50 md:hidden md:transition-all",
+        "backdrop-blur bg-background-primary shadow-sm fixed top-0 left-0 right-0 z-50 md:hidden",
         PADDING_Y[paddingY ?? "lg"]
-      )}
-    >
+      )}>
       <div className="mx-auto max-w-8xl justify-between px-4 md:flex">
         <div className="flex items-center justify-between">
           {brand}
@@ -89,7 +85,7 @@ export function MobileNav({ children, brand, darkThemeSwitch, paddingY }: Mobile
                 <div className="w-1"></div>
               </>
             )}
-            <div className="block md:hidden dark:text-gray-100" onClick={toogle}>
+            <div className="block md:hidden" onClick={toogle}>
               <VscMenu className={twMerge("h-6 w-6", open ? "hidden" : "block")}></VscMenu>
               <VscClose className={twMerge("h-6 w-6", open ? "block" : "hidden")}></VscClose>
             </div>
@@ -97,10 +93,9 @@ export function MobileNav({ children, brand, darkThemeSwitch, paddingY }: Mobile
         </div>
         <nav
           className={twMerge(
-            "fixed inset-x-0 bottom-0 top-14 items-center gap-8 bg-white dark:bg-stone-900 px-6 text-secondary-700 md:static md:flex md:bg-transparent md:p-0 h-screen md:h-auto",
+            "fixed inset-x-0 bottom-0 top-14 items-center gap-8 bg-background-primary px-6 text-background-contrast md:static md:flex md:bg-transparent md:p-0 h-screen md:h-auto",
             !open && "hidden"
-          )}
-        >
+          )}>
           {children}
         </nav>
       </div>

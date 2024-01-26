@@ -120,3 +120,10 @@ export const MODAL_SIZES = {
 };
 
 export type TooltipPlacement = "top" | "bottom" | "left" | "right";
+
+export type COLORS = "primary" | "accent" | "info" | "success" | "warning" | "danger";
+
+export const BACKGROUND_COLORS = {
+  primary: "bg-background-primary",
+  secondary: "bg-background-secondary",
+};

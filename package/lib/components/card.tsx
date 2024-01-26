@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { twMerge } from "tailwind-merge";
 import { FileViewer } from "./mediaObject";
+import { Badge } from ".";
 
 interface CardProps {
   metadata?: {
@@ -19,19 +20,24 @@ interface CardProps {
   marginAuto?: boolean;
   footer?: React.ReactNode;
   actions?: React.ReactNode;
+  imageSize?: { width: string | number; height: string | number };
   onClick?: () => void;
 }
 export function Card(props: CardProps) {
   return (
     <div
+      style={props.imageSize ? { width: props.imageSize.width } : undefined}
       onClick={props.onClick}
       className={twMerge(
-        "flex flex-col max-w-md rounded-lg bg-white dark:bg-black shadow shrink-0",
+        "flex flex-col max-w-md rounded-lg bg-background-secondary shadow shrink-0",
         props.marginAuto && "mx-auto",
         props.onClick && "cursor-pointer"
       )}>
       {props?.image && (
-        <FileViewer src={props.image.src} filename={props.image.mimeType}></FileViewer>
+        <FileViewer
+          src={props.image.src}
+          filename={props.image.mimeType}
+          size={props.imageSize}></FileViewer>
       )}
       {props?.icon && (
         <div className="flex items-center justify-center h-12 w-16 rounded-md">{props.icon}</div>
@@ -43,7 +49,7 @@ export function Card(props: CardProps) {
           !props.icon && !props.header ? "p-4 m-0" : "p-4 pt-0 m-0"
         )}>
         {props?.metadata && (
-          <p className="mb-1 text-sm text-primary-500 truncate">
+          <p className="mb-1 text-sm text-background-contrast truncate">
             {props?.metadata?.author}
             {props?.metadata?.date && (
               <>
@@ -53,23 +59,21 @@ export function Card(props: CardProps) {
           </p>
         )}
         {props?.title && (
-          <h3 className="mt-auto text-xl font-medium text-gray-900 dark:text-gray-100 justify-self-end truncate">
+          <h3 className="mt-auto text-xl font-medium text-background-contrast justify-self-end truncate">
             {props.title}
           </h3>
         )}
         {props?.paragraph && (
-          <p className="mt-1 text-gray-500 dark:text-gray-400 justify-self-end truncate">
+          <p className="mt-1 text-background-contrast justify-self-end truncate">
             {props.paragraph}
           </p>
         )}
         {props?.tags && (
           <div className="py-4 flex flex-wrap gap-2">
             {props.tags.map((tag) => (
-              <span
-                key={tag}
-                className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs font-semibold text-blue-600">
+              <Badge key={tag} round={"md"} color="accent">
                 {tag}
-              </span>
+              </Badge>
             ))}
           </div>
         )}

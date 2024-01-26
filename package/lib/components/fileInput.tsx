@@ -22,32 +22,26 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>((props, re
       items="start"
       justify="start"
       marginX={props.marginX}
-      marginY={props.marginY}
-    >
-      <label
-        htmlFor={id}
-        className="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-100"
-      >
+      marginY={props.marginY}>
+      <label htmlFor={id} className="mb-1 block text-sm font-medium text-background-contrast">
         {title}
       </label>
       <label
         htmlFor={id}
-        className="flex w-full cursor-pointer appearance-none items-center justify-center rounded-md border-2 border-dashed border-gray-200 p-6 transition-all hover:border-primary-300"
-      >
+        className="flex w-full cursor-pointer appearance-none items-center justify-center rounded-md border-2 border-dashed border-primary p-6 transition-all hover:border-primary-hover">
         <div className="space-y-1 text-center">
           <Show
             if={url$}
             else={
               <>
-                <div className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-100">
+                <div className="mx-auto inline-flex h-10 w-10 items-center justify-center rounded-full bg-background-secondary">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
                     stroke="currentColor"
-                    className="h-6 w-6 text-gray-500"
-                  >
+                    className="h-6 w-6 text-background-contrast">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -55,16 +49,17 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>((props, re
                     />
                   </svg>
                 </div>
-                <div className="text-gray-600 dark:text-gray-300">
-                  <button className="font-medium text-primary-500 hover:text-primary-700">
+                <div className="text-background-contrast">
+                  <button className="font-medium text-background-contrast hover:text-primary-hover">
                     Click to upload
                   </button>{" "}
                   or drag and drop
                 </div>
-                <p className="text-sm text-gray-500 dark:text-gray-300">SVG, PNG, JPG or GIF (max. 800x400px)</p>
+                <p className="text-sm text-background-contrast">
+                  SVG, PNG, JPG or GIF (max. 800x400px)
+                </p>
               </>
-            }
-          >
+            }>
             {() => <img src={url$.get()} alt="logo" className="w-40 mx-auto aspect-video" />}
           </Show>
         </div>
