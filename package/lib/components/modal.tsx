@@ -1,5 +1,5 @@
 import { twMerge } from "tailwind-merge";
-import { MODAL_SIZES } from "../utils";
+import { MODAL_SIZES, ROUNDED } from "../utils";
 import { Box } from "./box";
 import { Button } from "./button";
 
@@ -15,8 +15,15 @@ interface ModalProps {
   confirmText?: string;
   cancelText?: string;
   size?: keyof typeof MODAL_SIZES;
+  round?: keyof typeof ROUNDED;
+  disableOutsideClose?: boolean;
 }
 export function Modal(props: ModalProps) {
+  const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (props.disableOutsideClose) return;
+    props.onClose();
+  };
+
   return (
     <>
       <div
@@ -25,14 +32,17 @@ export function Modal(props: ModalProps) {
           !props.open ? "hidden" : "fixed"
         )}></div>
       <div
+        onClick={handleOutsideClick}
         className={twMerge(
           "inset-0 z-50 flex items-center justify-center p-4 sm:p-0",
           !props.open ? "hidden" : "fixed"
         )}>
         <div
+          onClick={(e) => e.stopPropagation()}
           className={twMerge(
-            "mx-auto overflow-hidden rounded-lg bg-background-primary border border-background-secondary shadow-xl sm:w-full max-h-[calc(100vh_-_2rem)] overflow-y-auto",
-            props.size ? MODAL_SIZES[props.size] : MODAL_SIZES.xl
+            "mx-auto overflow-hidden bg-background-primary border border-background-secondary shadow-xl sm:w-full max-h-[calc(100vh_-_2rem)] overflow-y-auto",
+            props.size ? MODAL_SIZES[props.size] : MODAL_SIZES.xl,
+            props.round ? ROUNDED[props.round] : ROUNDED.md
           )}>
           <div className="relative p-6">
             <button
