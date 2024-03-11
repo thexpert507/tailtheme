@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import { forwardRef, HTMLProps, useId } from "react";
 import { BsTrashFill } from "react-icons/bs";
 import { Box } from "./box";
-import { MARGINS_X, MARGINS_Y } from "@theme/utils";
+import { MARGINS_X, MARGINS_Y, ROUNDED } from "@theme/utils";
 
 interface FormInputProps extends HTMLProps<HTMLInputElement> {
   closable?: boolean;
@@ -13,6 +13,7 @@ interface FormInputProps extends HTMLProps<HTMLInputElement> {
   error?: string;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  round?: keyof typeof ROUNDED;
 }
 export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, ref) => {
   const { closable, marginX, marginY, leftIcon, rightIcon, ...others } = props;
@@ -49,7 +50,8 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, re
             "text-background-contrast",
             props.rightIcon && "pr-10",
             props.leftIcon && "pl-10",
-            "block w-full rounded-md bg-background-primary border-primary shadow-sm focus:border-primary-focus focus:ring focus:ring-primary-focus focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-primary-disabled disabled:text-primary-disabled"
+            props.round ? ROUNDED[props.round] : ROUNDED.md,
+            "block w-full bg-background-primary border-primary shadow-sm focus:border-primary-focus focus:ring focus:ring-primary-focus focus:ring-opacity-50 disabled:cursor-not-allowed disabled:bg-primary-disabled disabled:text-primary-disabled"
           )}
           {...others}
           id={id}

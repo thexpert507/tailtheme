@@ -47,7 +47,12 @@ export function Badge({
       {children}
 
       {closable && (
-        <button onClick={onClose}>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            onClose?.();
+          }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"

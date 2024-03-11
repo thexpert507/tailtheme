@@ -7,24 +7,14 @@ interface TableProps {
   items?: ReactNode[][];
   components?: ReactNode[] | ReactNode;
   height?: string;
-  bodyHeight?: string;
   width?: string;
   bordered?: boolean;
   round?: keyof typeof ROUNDED;
   shadow?: keyof typeof SHADOW;
   scrollToBottom?: boolean;
+  stickyHeader?: boolean;
 }
-export function Table({
-  headers,
-  items,
-  components,
-  height,
-  width,
-  bordered,
-  round,
-  shadow,
-  ...props
-}: TableProps) {
+export function Table(props: TableProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,17 +32,18 @@ export function Table({
       ref={ref}
       className={twMerge(
         "border",
-        height && twMerge("overflow-y-scroll", height),
-        width && twMerge("overflow-x-scroll", width),
-        bordered && "border-background-secondary",
-        round && ROUNDED[round],
-        shadow && SHADOW[shadow]
+        props.height && twMerge("overflow-y-scroll", props.height),
+        props.width && twMerge("overflow-x-scroll", props.width),
+        props.bordered && "border-background-secondary",
+        props.round && ROUNDED[props.round],
+        props.shadow && SHADOW[props.shadow]
       )}>
       <table className="w-full h-full border-collapse bg-background-primary text-left text-sm text-background-contrast">
-        <thead className="bg-background-secondary">
+        <thead
+          className={twMerge("bg-background-secondary", props.stickyHeader && "sticky top-0 z-10")}>
           <tr>
-            {Array.isArray(headers) ? (
-              headers.map((header, index) => (
+            {Array.isArray(props.headers) ? (
+              props.headers.map((header, index) => (
                 <th
                   key={index}
                   scope="col"
@@ -61,16 +52,15 @@ export function Table({
                 </th>
               ))
             ) : (
-              <th className="px-6 py-4 font-medium text-background-contrast">{headers}</th>
+              <th className="px-6 py-4 font-medium text-background-contrast">{props.headers}</th>
             )}
           </tr>
         </thead>
         <tbody
           className={twMerge(
-            "divide-y divide-background-secondary border-t border-background-secondary",
-            props.bodyHeight && twMerge("overflow-y-scroll", props.bodyHeight)
+            "divide-y divide-background-secondary border-t border-background-secondary"
           )}>
-          {items?.map((item, index) => (
+          {props.items?.map((item, index) => (
             <tr key={index} className="hover:bg-background-secondary">
               {item.map((td, index) => (
                 <td key={index} className="px-6 py-4">
@@ -79,7 +69,7 @@ export function Table({
               ))}
             </tr>
           ))}
-          {components}
+          {props.components}
         </tbody>
       </table>
     </div>
