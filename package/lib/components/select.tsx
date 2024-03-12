@@ -2,6 +2,38 @@ import { Control, Controller, FieldValues, Path } from "react-hook-form";
 import Select from "react-dropdown-select";
 import { Box } from "@theme/components";
 import { useId } from "react";
+import { twMerge } from "tailwind-merge";
+import { ROUNDED } from "@theme/utils";
+
+const labelSizes = {
+  "3xs": "text-xs",
+  "2xs": "text-xs",
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-sm",
+  lg: "text-sm",
+  xl: "text-sm",
+};
+
+const textSizes = {
+  "3xs": "text-xs",
+  "2xs": "text-xs",
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg",
+  xl: "text-xl",
+};
+
+const sizes = {
+  "3xs": `my-0.5 px-1 py-0.5 ${textSizes["3xs"]}`,
+  "2xs": `my-0.5 px-2 py-1 ${textSizes["2xs"]}`,
+  xs: `my-0.5 px-2 py-1.5 ${textSizes.xs}`,
+  sm: `my-1 px-2 py-2 ${textSizes.sm}`,
+  md: `my-1 px-3 py-2.5 ${textSizes.md}`,
+  lg: `my-1 px-3 py-3 ${textSizes.lg}`,
+  xl: `my-1 px-3 py-4 ${textSizes.xl}`,
+};
 
 export interface Option<T = any> {
   value: T;
@@ -20,6 +52,8 @@ type FormSelectProps<T extends FieldValues> = {
   help?: string;
   value?: string;
   defaultValue?: string;
+  size?: keyof typeof sizes;
+  round?: keyof typeof ROUNDED;
 } & (
   | { type: "native"; items: Item[]; onChange: (value: any) => void }
   | { type: "jsx"; options: Option[]; control: Control<T, any> }
@@ -28,11 +62,14 @@ type FormSelectProps<T extends FieldValues> = {
 export const FormSelect = <T extends FieldValues>(props: FormSelectProps<T>) => {
   const id = useId();
   return (
-    <Box full wrap={false} direction="column" flat>
+    <Box full wrap={false} direction="column" flat gap="none">
       {props.title && (
         <label
           htmlFor={id}
-          className="w-full mb-1 block text-sm font-medium text-background-contrast after:text-danger after:content-['*']">
+          className={twMerge(
+            props.size ? labelSizes[props.size] : labelSizes.md,
+            "w-full block font-medium text-background-contrast after:text-danger after:content-['*']"
+          )}>
           {props.title}
         </label>
       )}
@@ -46,7 +83,14 @@ export const FormSelect = <T extends FieldValues>(props: FormSelectProps<T>) => 
           onChange={(e) => {
             props.onChange(e.target.value);
           }}
-          className="block w-full rounded-md bg-background-primary text-background-contrast border-primary shadow-sm focus:border-primary-focus focus:ring focus:ring-primary-focus disabled:cursor-not-allowed disabled:bg-primary-disabled">
+          className={twMerge(
+            props.size ? sizes[props.size] : sizes.md,
+            props.round ? ROUNDED[props.round] : ROUNDED.md,
+            "bg-background-primary text-background-contrast",
+            "focus:border-primary-focus focus:ring focus:ring-primary-focus",
+            "disabled:cursor-not-allowed disabled:bg-primary-disabled",
+            "block w-full border-primary shadow-sm"
+          )}>
           {props.items.map((item) => {
             return (
               <option key={item.value} value={item.value}>
@@ -78,7 +122,15 @@ export const FormSelect = <T extends FieldValues>(props: FormSelectProps<T>) => 
           }}></Controller>
       )}
 
-      {props.help && <p className="mt-1 text-sm text-background-contrast">{props.help}</p>}
+      {props.help && (
+        <p
+          className={twMerge(
+            "text-background-contrast",
+            props.size ? labelSizes[props.size] : labelSizes.md
+          )}>
+          {props.help}
+        </p>
+      )}
     </Box>
   );
 };

@@ -6,11 +6,13 @@ export function Inputs() {
       <Title size="2xl">Inputs</Title>
 
       <Box full height="h-full" paddingX="sm" paddingY="sm" direction="column" gap="4xl">
-        <FormInput title="Base input" error="text error" />
+        <FormInput title="Base input" error="text error" isize="sm" round="sm" />
 
-        <FormInput title="Disabled input" disabled />
+        <FormInput title="Disabled input" disabled isize="sm" round="sm" />
 
         <FormSelect
+          size="sm"
+          round="sm"
           title="Base select"
           type="native"
           items={[
@@ -27,9 +29,9 @@ export function Inputs() {
           onChange={() => {}}
         />
 
-        <FormTextArea title="Base text area" />
+        <FormTextArea title="Base text area" size="sm" round="sm" />
 
-        <FileInput title="Base file" />
+        <FileInput title="Base file" size="sm" round="sm" />
       </Box>
     </Box>
   );

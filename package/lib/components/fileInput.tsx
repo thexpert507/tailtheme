@@ -1,18 +1,51 @@
 import { Show, useObservable } from "@legendapp/state/react";
-import { MARGINS_X, MARGINS_Y } from "@theme/utils";
+import { MARGINS_X, MARGINS_Y, ROUNDED } from "@theme/utils";
 import { useId, forwardRef } from "react";
 import { Box } from "./box";
+import { twMerge } from "tailwind-merge";
+
+const labelSizes = {
+  "3xs": "text-xs",
+  "2xs": "text-xs",
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-sm",
+  lg: "text-sm",
+  xl: "text-sm",
+};
+
+const textSizes = {
+  "3xs": "text-xs",
+  "2xs": "text-xs",
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg",
+  xl: "text-xl",
+};
+
+const sizes = {
+  "3xs": `my-0.5 px-1 py-0.5 ${textSizes["3xs"]}`,
+  "2xs": `my-0.5 px-2 py-1 ${textSizes["2xs"]}`,
+  xs: `my-0.5 px-2 py-1.5 ${textSizes.xs}`,
+  sm: `my-1 px-2 py-2 ${textSizes.sm}`,
+  md: `my-1 px-3 py-2.5 ${textSizes.md}`,
+  lg: `my-1 px-3 py-3 ${textSizes.lg}`,
+  xl: `my-1 px-3 py-4 ${textSizes.xl}`,
+};
 
 interface FileInputProps {
   title?: string;
   marginX?: keyof typeof MARGINS_X;
   marginY?: keyof typeof MARGINS_Y;
+  size?: keyof typeof sizes;
+  round?: keyof typeof ROUNDED;
 }
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>((props, ref) => {
   const id = useId();
   const url$ = useObservable<string>("");
 
-  const { title, marginX, marginY, ...others } = props;
+  const { title, marginX, marginY, size, round, ...others } = props;
 
   return (
     <Box
@@ -21,14 +54,23 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>((props, re
       direction="column"
       items="start"
       justify="start"
+      gap="none"
       marginX={props.marginX}
       marginY={props.marginY}>
-      <label htmlFor={id} className="mb-1 block text-sm font-medium text-background-contrast">
+      <label
+        htmlFor={id}
+        className={twMerge(
+          "block font-medium text-background-contrast",
+          size ? labelSizes[size] : labelSizes.md
+        )}>
         {title}
       </label>
       <label
         htmlFor={id}
-        className="flex w-full cursor-pointer appearance-none items-center justify-center rounded-md border-2 border-dashed border-primary p-6 transition-all hover:border-primary-hover">
+        className={twMerge(
+          props.size ? sizes[props.size] : sizes.md,
+          "flex w-full cursor-pointer appearance-none items-center justify-center border-[1.5px] border-dashed border-primary p-6 transition-all hover:border-primary-hover"
+        )}>
         <div className="space-y-1 text-center">
           <Show
             if={url$}
