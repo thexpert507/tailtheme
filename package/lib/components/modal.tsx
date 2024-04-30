@@ -17,6 +17,7 @@ interface ModalProps {
   size?: keyof typeof MODAL_SIZES;
   round?: keyof typeof ROUNDED;
   disableOutsideClose?: boolean;
+  testId?: string;
 }
 export function Modal(props: ModalProps) {
   const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -32,6 +33,7 @@ export function Modal(props: ModalProps) {
           !props.open ? "hidden" : "fixed"
         )}></div>
       <div
+        data-testid={props.testId}
         onClick={handleOutsideClick}
         className={twMerge(
           "inset-0 z-50 flex items-center justify-center p-4 sm:p-0",

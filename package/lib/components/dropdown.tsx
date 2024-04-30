@@ -18,6 +18,7 @@ type DropdownProps = {
   options?: DropdownOption[];
   position?: "left" | "right";
   width?: string;
+  testId?: string;
 };
 export function Dropdown(props: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,7 +53,7 @@ export function Dropdown(props: DropdownProps) {
   const handleOnClick = () => setIsOpen((prev) => !prev);
 
   return (
-    <div ref={divRef} className="relative overflow-visible">
+    <div ref={divRef} className="relative overflow-visible" data-testid={props.testId}>
       {props.wrapComponent({ onClick: handleOnClick })}
 
       <div

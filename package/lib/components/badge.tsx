@@ -19,45 +19,37 @@ interface BadgeProps {
   block?: boolean;
   width?: string;
   truncate?: boolean;
+  testId?: string;
   onClose?: () => void;
 }
-export function Badge({
-  children,
-  color,
-  large,
-  round,
-  closable,
-  onClose,
-  block,
-  width,
-  truncate,
-}: BadgeProps) {
+export function Badge(props: BadgeProps) {
   return (
     <span
+      data-testid={props.testId}
       className={twMerge(
         "rounded-full px-2 py-1 text-xs font-semibold whitespace-nowrap",
-        colors[color ?? "primary"],
-        large && "text-sm",
-        ROUNDED[round ?? "sm"],
-        closable && "inline-flex items-center gap-1",
-        block && "block",
-        width && twMerge(width, "truncate"),
-        truncate && "truncate"
+        colors[props.color ?? "primary"],
+        props.large && "text-sm",
+        ROUNDED[props.round ?? "sm"],
+        props.closable && "inline-flex items-center gap-1",
+        props.block && "block",
+        props.width && twMerge(props.width, "truncate"),
+        props.truncate && "truncate"
       )}>
-      {children}
+      {props.children}
 
-      {closable && (
+      {props.closable && (
         <button
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
-            onClose?.();
+            props.onClose?.();
           }}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className={twMerge("h-3 w-3 opacity-80", large && "h-4 w-4")}>
+            className={twMerge("h-3 w-3 opacity-80", props.large && "h-4 w-4")}>
             <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
           </svg>
         </button>

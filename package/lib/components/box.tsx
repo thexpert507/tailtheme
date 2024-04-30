@@ -31,10 +31,12 @@ interface BoxProps {
   width?: string;
   bg?: keyof typeof BACKGROUND_COLORS;
   round?: keyof typeof ROUNDED;
+  testId?: string;
 }
 export function Box(props: BoxProps) {
   return (
     <div
+      data-testid={props.testId}
       className={twMerge(
         "flex rounded-lg bg-transparent px-1 py-2 gap-1.5",
         props.shadow && SHADOW[props.shadow],

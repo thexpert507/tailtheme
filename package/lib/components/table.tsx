@@ -13,6 +13,7 @@ interface TableProps {
   shadow?: keyof typeof SHADOW;
   scrollToBottom?: boolean;
   stickyHeader?: boolean;
+  testId?: string;
 }
 export function Table(props: TableProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,6 +31,7 @@ export function Table(props: TableProps) {
   return (
     <div
       ref={ref}
+      data-testid={props.testId}
       className={twMerge(
         "border",
         props.height && twMerge("overflow-y-scroll", props.height),

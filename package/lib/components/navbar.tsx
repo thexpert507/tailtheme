@@ -8,11 +8,13 @@ import { PADDING_Y } from "@theme/utils";
 
 interface NavProps {
   children?: React.ReactNode;
+  testId?: string;
 }
-export function Nav({ children }: NavProps) {
+export function Nav({ children, testId }: NavProps) {
   return (
     <>
       <header
+        data-testid={testId}
         className={twMerge(
           "hidden md:block backdrop-blur bg-background-primary shadow-sm absolute top-0 left-0 right-0 z-50 py-4 md:fixed"
         )}>
@@ -27,13 +29,19 @@ export function Nav({ children }: NavProps) {
   );
 }
 
-export function NavBrand({ children }: NavProps) {
-  return <div className="flex-shrink-0 flex items-center justify-between">{children}</div>;
+export function NavBrand({ children, testId }: NavProps) {
+  return (
+    <div data-testid={testId} className="flex-shrink-0 flex items-center justify-between">
+      {children}
+    </div>
+  );
 }
 
-export function NavItems({ children }: NavProps) {
+export function NavItems({ children, testId }: NavProps) {
   return (
-    <ul className="mt-5 items-center gap-8 space-y-6 font-medium md:mt-0 md:flex md:space-y-0">
+    <ul
+      data-testid={testId}
+      className="mt-5 items-center gap-8 space-y-6 font-medium md:mt-0 md:flex md:space-y-0">
       {children}
     </ul>
   );
@@ -43,10 +51,11 @@ interface NavItemProps {
   children?: React.ReactNode;
   active?: boolean;
   onClick?: () => void;
+  testId?: string;
 }
-export function NavItem({ children, onClick, active }: NavItemProps) {
+export function NavItem({ children, onClick, active, testId }: NavItemProps) {
   return (
-    <li>
+    <li data-testid={testId}>
       <button
         onClick={onClick}
         className={twMerge(
@@ -64,13 +73,15 @@ interface MobileNavProps {
   brand: React.ReactNode;
   darkThemeSwitch?: boolean;
   paddingY?: keyof typeof PADDING_Y;
+  testId?: string;
 }
-export function MobileNav({ children, brand, darkThemeSwitch, paddingY }: MobileNavProps) {
+export function MobileNav({ children, brand, darkThemeSwitch, paddingY, testId }: MobileNavProps) {
   const [open, setOpen] = useState(false);
   const toogle = () => setOpen(!open);
 
   return (
     <header
+      data-testid={testId}
       className={twMerge(
         "backdrop-blur bg-background-primary shadow-sm fixed top-0 left-0 right-0 z-50 md:hidden",
         PADDING_Y[paddingY ?? "lg"]

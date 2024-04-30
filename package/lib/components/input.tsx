@@ -45,9 +45,10 @@ interface FormInputProps extends HTMLProps<HTMLInputElement> {
   rightIcon?: React.ReactNode;
   round?: keyof typeof ROUNDED;
   isize?: keyof typeof sizes;
+  testId?: string;
 }
 export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, ref) => {
-  const { closable, marginX, marginY, leftIcon, rightIcon, isize, ...others } = props;
+  const { closable, marginX, marginY, leftIcon, rightIcon, isize, testId, ...others } = props;
   const id = useId();
   return (
     <Box
@@ -85,6 +86,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, re
           </div>
         )}
         <input
+          data-testid={testId}
           className={twMerge(
             "text-background-contrast",
             props.rightIcon && "pr-10",

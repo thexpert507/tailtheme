@@ -4,11 +4,15 @@ interface SwitchProps {
   checked: boolean;
   onChange: (check: boolean) => void;
   disabled?: boolean;
+  testId?: string;
 }
-export function Switch({ checked, onChange, disabled }: SwitchProps) {
+export function Switch({ checked, onChange, disabled, testId }: SwitchProps) {
   const id = useId();
   return (
-    <label htmlFor={id} className="relative inline-flex flex-shrink-0 cursor-pointer items-center">
+    <label
+      data-testid={testId}
+      htmlFor={id}
+      className="relative inline-flex flex-shrink-0 cursor-pointer items-center">
       <input
         type="checkbox"
         id={id}

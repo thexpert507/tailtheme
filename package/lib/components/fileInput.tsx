@@ -40,12 +40,13 @@ interface FileInputProps {
   marginY?: keyof typeof MARGINS_Y;
   size?: keyof typeof sizes;
   round?: keyof typeof ROUNDED;
+  testId?: string;
 }
 export const FileInput = forwardRef<HTMLInputElement, FileInputProps>((props, ref) => {
   const id = useId();
   const url$ = useObservable<string>("");
 
-  const { title, marginX, marginY, size, round, ...others } = props;
+  const { title, marginX, marginY, size, round, testId, ...others } = props;
 
   return (
     <Box
@@ -109,6 +110,7 @@ export const FileInput = forwardRef<HTMLInputElement, FileInputProps>((props, re
           ref={ref}
           {...others}
           id={id}
+          data-testid={testId}
           type="file"
           className="sr-only"
           onChange={(e) => {

@@ -54,6 +54,7 @@ type FormSelectProps<T extends FieldValues> = {
   defaultValue?: string;
   size?: keyof typeof sizes;
   round?: keyof typeof ROUNDED;
+  testId?: string;
 } & (
   | { type: "native"; items: Item[]; onChange: (value: any) => void }
   | { type: "jsx"; options: Option[]; control: Control<T, any> }
@@ -62,7 +63,7 @@ type FormSelectProps<T extends FieldValues> = {
 export const FormSelect = <T extends FieldValues>(props: FormSelectProps<T>) => {
   const id = useId();
   return (
-    <Box full wrap={false} direction="column" flat gap="none">
+    <Box full wrap={false} direction="column" flat gap="none" testId={props.testId}>
       {props.title && (
         <label
           htmlFor={id}

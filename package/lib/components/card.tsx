@@ -22,10 +22,12 @@ interface CardProps {
   actions?: React.ReactNode;
   imageSize?: { width: string | number; height: string | number };
   onClick?: () => void;
+  testId?: string;
 }
 export function Card(props: CardProps) {
   return (
     <div
+      data-testid={props.testId}
       style={props.imageSize ? { width: props.imageSize.width } : undefined}
       onClick={props.onClick}
       className={twMerge(

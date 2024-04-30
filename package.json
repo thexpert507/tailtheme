@@ -1,6 +1,6 @@
 {
   "name": "tailtheme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Tailtheme project",
   "scripts": {
     "start": "pnpm --filter tailtheme build -w",

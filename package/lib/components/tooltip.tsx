@@ -21,6 +21,7 @@ interface TooltipProps {
   children: React.ReactNode;
   elementRef: RefObject<HTMLElement>;
   placement?: TooltipPlacement;
+  testId?: string;
 }
 export function Tooltip(props: TooltipProps) {
   const tooltipDivRef = useRef<HTMLDivElement>(null);
@@ -64,13 +65,13 @@ export function Tooltip(props: TooltipProps) {
       {() => {
         return (
           <div
+            data-testid={props.testId}
             ref={tooltipDivRef}
             style={styles$.get()}
             className={twMerge(
               "opacity-0 fixed z-[9999] bg-background-secondary shadow text-background-contrast whitespace-nowrap rounded-md",
               isHovered$.get() && "opacity-100"
-            )}
-          >
+            )}>
             <Box flat paddingX="md" paddingY="xs">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -78,8 +79,7 @@ export function Tooltip(props: TooltipProps) {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="h-6 w-6 cursor-pointer"
-              >
+                className="h-6 w-6 cursor-pointer">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

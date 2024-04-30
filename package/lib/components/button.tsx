@@ -77,11 +77,13 @@ interface ButtonProps {
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   preventDefault?: boolean;
   stopPropagation?: boolean;
+  testId?: string;
 }
 export function Button(props: ButtonProps) {
   const buttonRef = useRef(null);
   return (
     <button
+      data-testid={props.testId}
       ref={buttonRef}
       disabled={props.disabled}
       type={props.type ?? "button"}

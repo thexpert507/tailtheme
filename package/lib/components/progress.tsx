@@ -31,10 +31,12 @@ interface ProgressProps {
   label?: string;
   labelSize?: keyof typeof labelSizes;
   showPercentage?: boolean;
+  testId?: string;
 }
 export function Progress(props: ProgressProps) {
   const baseJSX = (
     <div
+      data-testid={props.testId}
       className={twMerge(
         "relative flex w-full overflow-hidden rounded-full bg-background-primary dark:bg-transparent",
         props.size ? sizes[props.size] : sizes.md
@@ -56,7 +58,7 @@ export function Progress(props: ProgressProps) {
 
   if (props.label)
     return (
-      <div className="space-y-1 dark:bg-transparent w-full">
+      <div className="space-y-1 dark:bg-transparent w-full" data-testid={props.testId}>
         <dl className="flex items-center justify-between">
           <dt
             className={twMerge(

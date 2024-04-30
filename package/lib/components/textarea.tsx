@@ -40,6 +40,7 @@ interface FormTextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaEle
   marginY?: keyof typeof MARGINS_Y;
   size?: keyof typeof sizes;
   round?: keyof typeof ROUNDED;
+  testId?: string;
 }
 export const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>((props, ref) => {
   const id = useId();
@@ -51,7 +52,8 @@ export const FormTextArea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>((
       items="start"
       marginX={props.marginX}
       marginY={props.marginY}
-      gap="none">
+      gap="none"
+      testId={props.testId}>
       {props.title && (
         <label
           htmlFor={id}
