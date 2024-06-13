@@ -127,3 +127,9 @@ export const BACKGROUND_COLORS = {
   primary: "bg-background-primary",
   secondary: "bg-background-secondary",
 };
+
+export type Animations = "fade-in";
+
+export const ANIMATIONS: Record<Animations, string> = {
+  "fade-in": "animate-fade-in",
+};

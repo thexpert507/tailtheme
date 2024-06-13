@@ -10,7 +10,7 @@ export function Modals() {
     <Box flat full items="start" justify="start" direction="column">
       <Title size="2xl">Modales</Title>
 
-      <Modal open={open} onClose={toogle} title="Base modal" enableConfirm enableCancel>
+      <Modal open={open} onClose={toogle} title="Base modal" enableConfirm enableCancel animation="fade-in">
         Contenido del modal
       </Modal>
 

@@ -1,18 +1,20 @@
 import { COLORS, ROUNDED } from "@theme/utils";
+import { BG_COLORS, TEXT_CONTRAST_COLORS, TEXT_COLORS, BORDER_COLORS, SOFT_COLORS } from "@theme/utils/colors";
 import { twMerge } from "tailwind-merge";
 
-const colors: Record<COLORS, string> = {
-  primary: "bg-primary text-primary-contrast",
-  accent: "bg-accent text-accent-contrast",
-  success: "bg-success text-success-contrast",
-  warning: "bg-warning text-warning-contrast",
-  danger: "bg-danger text-danger-contrast",
-  info: "bg-info text-info-contrast",
-};
+function Variant(color: COLORS): Record<Variants, string> {
+  return {
+    solid: `${BG_COLORS[color]} ${TEXT_CONTRAST_COLORS[color]} border border-transparent`,
+    outlined: `bg-transparent border ${TEXT_COLORS[color]} ${BORDER_COLORS[color]}`,
+    ghost: `border border-transparent ${SOFT_COLORS[color]}`,
+  };
+}
+
+type Variants = "solid" | "outlined" | "ghost";
 
 interface BadgeProps {
   children?: React.ReactNode;
-  color?: keyof typeof colors;
+  color?: COLORS;
   round?: keyof typeof ROUNDED;
   large?: boolean;
   closable?: boolean;
@@ -20,6 +22,7 @@ interface BadgeProps {
   width?: string;
   truncate?: boolean;
   testId?: string;
+  variant?: Variants;
   onClose?: () => void;
 }
 export function Badge(props: BadgeProps) {
@@ -28,7 +31,7 @@ export function Badge(props: BadgeProps) {
       data-testid={props.testId}
       className={twMerge(
         "rounded-full px-2 py-1 text-xs font-semibold whitespace-nowrap",
-        colors[props.color ?? "primary"],
+        Variant(props.color ?? "primary")[props.variant ?? "solid"],
         props.large && "text-sm",
         ROUNDED[props.round ?? "sm"],
         props.closable && "inline-flex items-center gap-1",

@@ -14,13 +14,16 @@ export default defineConfig({
         utils: "./lib/utils/index.ts",
         context: "./lib/context/index.ts",
         config: "./lib/config/index.ts",
+        preset: "./lib/preset.ts",
       },
       name: "tailtheme",
+      formats: ["es", "cjs"],
       fileName: (format, entry) => `${entry}.${format}.js`,
     },
     rollupOptions: {
       external: [
         "react",
+        "path",
         "@legendapp/state",
         "@legendapp/state/react",
         "@react-three/drei",

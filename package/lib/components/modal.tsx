@@ -1,7 +1,8 @@
 import { twMerge } from "tailwind-merge";
-import { MODAL_SIZES, ROUNDED } from "../utils";
+import { ANIMATIONS, Animations, MODAL_SIZES, ROUNDED } from "../utils";
 import { Box } from "./box";
 import { Button } from "./button";
+import { Fragment } from "react";
 
 interface ModalProps {
   open: boolean;
@@ -18,6 +19,7 @@ interface ModalProps {
   round?: keyof typeof ROUNDED;
   disableOutsideClose?: boolean;
   testId?: string;
+  animation?: Animations;
 }
 export function Modal(props: ModalProps) {
   const handleOutsideClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -26,11 +28,12 @@ export function Modal(props: ModalProps) {
   };
 
   return (
-    <>
+    <Fragment>
       <div
         className={twMerge(
           "inset-0 z-50 backdrop-blur-sm transition-all duration-150",
-          !props.open ? "hidden" : "fixed"
+          !props.open ? "hidden" : "fixed",
+          props.animation && ANIMATIONS[props.animation]
         )}></div>
       <div
         data-testid={props.testId}
@@ -44,7 +47,8 @@ export function Modal(props: ModalProps) {
           className={twMerge(
             "mx-auto overflow-hidden bg-background-primary border border-background-secondary shadow-xl sm:w-full max-h-[calc(100vh_-_2rem)] overflow-y-auto",
             props.size ? MODAL_SIZES[props.size] : MODAL_SIZES.xl,
-            props.round ? ROUNDED[props.round] : ROUNDED.md
+            props.round ? ROUNDED[props.round] : ROUNDED.md,
+            props.animation && ANIMATIONS[props.animation]
           )}>
           <div className="relative p-6">
             <button
@@ -96,6 +100,6 @@ export function Modal(props: ModalProps) {
           )}
         </div>
       </div>
-    </>
+    </Fragment>
   );
 }

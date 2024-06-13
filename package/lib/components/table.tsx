@@ -81,10 +81,12 @@ export function Table(props: TableProps) {
 interface TableRowProps {
   onClick?: () => void;
   children?: ReactNode[] | ReactNode;
+  testId?: string;
 }
-export function TableRow({ children, onClick }: TableRowProps) {
+export function TableRow({ children, onClick, testId }: TableRowProps) {
   return (
     <tr
+      data-testid={testId}
       onClick={(e) => {
         e.stopPropagation();
         onClick && onClick();

@@ -1,10 +1,12 @@
-type TailthemeColor = {
+export type TailthemeColor = {
   base: string;
   hover: string;
   ring: string;
   focus: string;
   disabled: string;
   contrast: string;
+  soft: string;
+  softContrast: string;
 };
 
 export type Tailtheme = {

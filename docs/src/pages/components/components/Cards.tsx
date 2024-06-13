@@ -19,6 +19,7 @@ export function Cards() {
           paragraph="Lorem ipsum dolor sit amet"
           title="Base card"
           tags={["home", "product"]}
+          animation="fade-in"
         />
 
         <Card
@@ -34,6 +35,7 @@ export function Cards() {
           paragraph="Lorem ipsum dolor sit amet"
           title="Base card"
           tags={["home", "product"]}
+          animation="fade-in"
         />
       </Box>
     </Box>

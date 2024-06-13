@@ -1,28 +1,25 @@
 import { format } from "date-fns";
 import { twMerge } from "tailwind-merge";
 import { FileViewer } from "./mediaObject";
-import { Badge } from ".";
+import { Badge } from "./badge";
+import { ANIMATIONS, Animations } from "@theme/utils";
 
 interface CardProps {
-  metadata?: {
-    author?: string;
-    date?: Date;
-  };
+  metadata?: { author?: string; date?: Date };
   header?: React.ReactNode;
   icon?: React.ReactNode;
   title?: string;
   paragraph?: string;
   tags?: string[];
-  image?: {
-    src: string;
-    mimeType: string;
-  };
+  image?: { src: string; mimeType: string };
   marginAuto?: boolean;
   footer?: React.ReactNode;
   actions?: React.ReactNode;
   imageSize?: { width: string | number; height: string | number };
   onClick?: () => void;
   testId?: string;
+  className?: string;
+  animation?: Animations;
 }
 export function Card(props: CardProps) {
   return (
@@ -33,7 +30,9 @@ export function Card(props: CardProps) {
       className={twMerge(
         "flex flex-col max-w-md rounded-lg bg-background-secondary shadow shrink-0",
         props.marginAuto && "mx-auto",
-        props.onClick && "cursor-pointer"
+        props.onClick && "cursor-pointer",
+        props.className,
+        props.animation && ANIMATIONS[props.animation]
       )}>
       {props?.image && (
         <FileViewer

@@ -2,27 +2,13 @@ import { ROUNDED, TooltipPlacement, COLORS } from "@theme/utils";
 import { twMerge } from "tailwind-merge";
 import { MouseEvent, useRef } from "react";
 import { Tooltip } from "./tooltip";
-
-const TEXT_COLORS: Record<COLORS, string> = {
-  primary: "text-primary",
-  accent: "text-accent",
-  warning: "text-warning",
-  danger: "text-danger",
-  info: "text-info",
-  success: "text-success",
-};
-
-const BORDER_COLORS: Record<COLORS, string> = {
-  primary: "border-primary focus:ring-primary-focus",
-  accent:
-    "border-green-500 dark:border-green-500/80 focus:ring-green-100 dark:focus:ring-green-100/40",
-  warning:
-    "border-yellow-500 dark:border-yellow-500/80 focus:ring-yellow-100 dark:focus:ring-yellow-100/40",
-  danger: "border-red-500 dark:border-red-500/80 focus:ring-red-100 dark:focus:ring-red-100/40",
-  info: "border-violet-500 dark:border-violet-500/80 focus:ring-violet-100 dark:focus:ring-violet-100/40",
-  success:
-    "border-gray-500 dark:border-gray-500/80 focus:ring-gray-100 dark:focus:ring-gray-100/40",
-};
+import {
+  BORDER_COLORS,
+  HOVER_SOFT_COLORS,
+  RING_FOCUS_COLORS,
+  SOFT_COLORS,
+  TEXT_COLORS,
+} from "@theme/utils/colors";
 
 const colors: Record<COLORS, string> = {
   primary:
@@ -40,9 +26,10 @@ const colors: Record<COLORS, string> = {
 
 function Variant(color: COLORS) {
   return {
-    text: "text-background-contrast border-transparent ring-transparent bg-background-primary shadow-none",
-    outlined: `bg-transparent ${TEXT_COLORS[color]} ${BORDER_COLORS[color]} `,
+    text: `border-transparent bg-transparent text-background-contrast ${HOVER_SOFT_COLORS[color]} ring-transparent transition-all duration-300`,
+    outlined: `bg-transparent ${TEXT_COLORS[color]} ${BORDER_COLORS[color]} ${RING_FOCUS_COLORS[color]}`,
     contained: `border border-transparent ${colors[color]}`,
+    ghost: `border border-transparent ${SOFT_COLORS[color]} focus:ring focus:ring-${color}-focus`,
     grouped: `border-none border-transparent bg-transparent shadow-none`,
   };
 }

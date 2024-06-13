@@ -59,6 +59,8 @@ export function ThemeProvider({ children, theme }: ThemeProviderProps) {
     const body = document.body;
     // Primary
     body.style.setProperty("--color-primary", theme.colors.primary.base);
+    body.style.setProperty("--color-primary-soft", theme.colors.primary.soft);
+    body.style.setProperty("--color-primary-soft-contrast", theme.colors.primary.softContrast);
     body.style.setProperty("--color-primary-hover", theme.colors.primary.hover);
     body.style.setProperty("--color-primary-focus", theme.colors.primary.focus);
     body.style.setProperty("--color-primary-ring", theme.colors.primary.ring);
@@ -67,6 +69,8 @@ export function ThemeProvider({ children, theme }: ThemeProviderProps) {
 
     // Accent
     body.style.setProperty("--color-accent", theme.colors.accent.base);
+    body.style.setProperty("--color-accent-soft", theme.colors.accent.soft);
+    body.style.setProperty("--color-accent-soft-contrast", theme.colors.accent.softContrast);
     body.style.setProperty("--color-accent-hover", theme.colors.accent.hover);
     body.style.setProperty("--color-accent-focus", theme.colors.accent.focus);
     body.style.setProperty("--color-accent-ring", theme.colors.accent.ring);
@@ -75,6 +79,8 @@ export function ThemeProvider({ children, theme }: ThemeProviderProps) {
 
     // Info
     body.style.setProperty("--color-info", theme.colors.info.base);
+    body.style.setProperty("--color-info-soft", theme.colors.info.soft);
+    body.style.setProperty("--color-info-soft-contrast", theme.colors.info.softContrast);
     body.style.setProperty("--color-info-hover", theme.colors.info.hover);
     body.style.setProperty("--color-info-focus", theme.colors.info.focus);
     body.style.setProperty("--color-info-ring", theme.colors.info.ring);
@@ -83,6 +89,8 @@ export function ThemeProvider({ children, theme }: ThemeProviderProps) {
 
     // Success
     body.style.setProperty("--color-success", theme.colors.success.base);
+    body.style.setProperty("--color-success-soft", theme.colors.success.soft);
+    body.style.setProperty("--color-success-soft-contrast", theme.colors.success.softContrast);
     body.style.setProperty("--color-success-hover", theme.colors.success.hover);
     body.style.setProperty("--color-success-focus", theme.colors.success.focus);
     body.style.setProperty("--color-success-ring", theme.colors.success.ring);
@@ -91,6 +99,8 @@ export function ThemeProvider({ children, theme }: ThemeProviderProps) {
 
     // Warning
     body.style.setProperty("--color-warning", theme.colors.warning.base);
+    body.style.setProperty("--color-warning-soft", theme.colors.warning.soft);
+    body.style.setProperty("--color-warning-soft-contrast", theme.colors.warning.softContrast);
     body.style.setProperty("--color-warning-hover", theme.colors.warning.hover);
     body.style.setProperty("--color-warning-focus", theme.colors.warning.focus);
     body.style.setProperty("--color-warning-ring", theme.colors.warning.ring);
@@ -99,6 +109,8 @@ export function ThemeProvider({ children, theme }: ThemeProviderProps) {
 
     // Danger
     body.style.setProperty("--color-danger", theme.colors.danger.base);
+    body.style.setProperty("--color-danger-soft", theme.colors.danger.soft);
+    body.style.setProperty("--color-danger-soft-contrast", theme.colors.danger.softContrast);
     body.style.setProperty("--color-danger-hover", theme.colors.danger.hover);
     body.style.setProperty("--color-danger-focus", theme.colors.danger.focus);
     body.style.setProperty("--color-danger-ring", theme.colors.danger.ring);

@@ -1,55 +1,31 @@
-import { Tailtheme } from "./theme";
+import { Tailtheme, TailthemeColor } from "./theme";
+
+import Color from "color";
+
+// Función para generar variantes de un color base
+function generateTailthemeColor(baseColor: string): TailthemeColor {
+  const color = Color(baseColor);
+  const softColor = color.lighten(0.5);
+  return {
+    base: color.hex(),
+    hover: color.darken(0.2).hex(),
+    ring: color.alpha(0.5).rgb().string(),
+    focus: color.lighten(0.2).hex(),
+    disabled: color.desaturate(0.5).lighten(0.4).hex(),
+    contrast: color.isLight() ? color.darken(0.7).hex() : color.lighten(1.5).hex(),
+    soft: softColor.hex(),
+    softContrast: softColor.isLight() ? softColor.darken(0.8).hex() : softColor.lighten(0.7).hex(),
+  };
+}
 
 export const BaseTheme: Tailtheme = {
   colors: {
-    primary: {
-      base: "#3b82f6",
-      hover: "#2563eb",
-      ring: "#60a5fa",
-      focus: "#1d4ed8",
-      disabled: "#93c5fd",
-      contrast: "#eff6ff",
-    },
-    accent: {
-      base: "#78716c",
-      hover: "#57534e",
-      ring: "#a8a29e",
-      focus: "#44403c",
-      disabled: "#d6d3d1",
-      contrast: "#fafaf9",
-    },
-    danger: {
-      base: "#ef4444",
-      hover: "#dc2626",
-      ring: "#f87171",
-      focus: "#b91c1c",
-      disabled: "#fca5a5",
-      contrast: "#fef2f2",
-    },
-    success: {
-      base: "#22c55e",
-      hover: "#16a34a",
-      ring: "#4ade80",
-      focus: "#15803d",
-      disabled: "#86efac",
-      contrast: "#f0fdf4",
-    },
-    warning: {
-      base: "#eab308",
-      hover: "#ca8a04",
-      ring: "#facc15",
-      focus: "#a16207",
-      disabled: "#fde047",
-      contrast: "#fefce8",
-    },
-    info: {
-      base: "#64748b",
-      hover: "#475569",
-      ring: "#94a3b8",
-      focus: "#334155",
-      disabled: "#cbd5e1",
-      contrast: "#f8fafc",
-    },
+    primary: generateTailthemeColor("#3b82f6"),
+    accent: generateTailthemeColor("#78716c"),
+    danger: generateTailthemeColor("#ef4444"),
+    success: generateTailthemeColor("#22c55e"),
+    warning: generateTailthemeColor("#eab308"),
+    info: generateTailthemeColor("#64748b"),
     neutral: {
       primary: "#f0efef",
       secondary: "#cbcac8",
@@ -66,54 +42,12 @@ export const BaseTheme: Tailtheme = {
 
 export const DarkTheme: Tailtheme = {
   colors: {
-    primary: {
-      base: "#3b82f6",
-      hover: "#2563eb",
-      ring: "#60a5fa",
-      focus: "#1d4ed8",
-      disabled: "#93c5fd",
-      contrast: "#eff6ff",
-    },
-    accent: {
-      base: "#78716c",
-      hover: "#57534e",
-      ring: "#a8a29e",
-      focus: "#44403c",
-      disabled: "#d6d3d1",
-      contrast: "#fafaf9",
-    },
-    danger: {
-      base: "#ef4444",
-      hover: "#dc2626",
-      ring: "#f87171",
-      focus: "#b91c1c",
-      disabled: "#fca5a5",
-      contrast: "#fef2f2",
-    },
-    success: {
-      base: "#22c55e",
-      hover: "#16a34a",
-      ring: "#4ade80",
-      focus: "#15803d",
-      disabled: "#86efac",
-      contrast: "#f0fdf4",
-    },
-    warning: {
-      base: "#eab308",
-      hover: "#ca8a04",
-      ring: "#facc15",
-      focus: "#a16207",
-      disabled: "#fde047",
-      contrast: "#fefce8",
-    },
-    info: {
-      base: "#64748b",
-      hover: "#475569",
-      ring: "#94a3b8",
-      focus: "#334155",
-      disabled: "#cbd5e1",
-      contrast: "#f8fafc",
-    },
+    primary: generateTailthemeColor("#3b82f6"),
+    accent: generateTailthemeColor("#78716c"),
+    danger: generateTailthemeColor("#ef4444"),
+    success: generateTailthemeColor("#22c55e"),
+    warning: generateTailthemeColor("#eab308"),
+    info: generateTailthemeColor("#64748b"),
     neutral: {
       primary: "#f0efef",
       secondary: "#cbcac8",
