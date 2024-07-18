@@ -1,7 +1,7 @@
 import { Box, Title, Dropdown, Button } from "tailtheme/components";
 import { FaSearch, FaBacteria, FaEthernet } from "react-icons/fa";
 
-export function Dropdowns() {
+export default function Dropdowns() {
   return (
     <Box flat full items="start" justify="start" direction="column" gap="2xl">
       <Title size="2xl">Dropdowns</Title>

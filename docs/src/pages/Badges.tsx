@@ -3,7 +3,7 @@ import { COLORS } from "tailtheme/utils";
 
 const colors: COLORS[] = ["accent", "danger", "info", "primary", "success", "warning"];
 
-export function Badges() {
+export default function Badges() {
   const variants = ["solid", "outlined", "ghost"] as const;
   const rounds = ["none", "sm", "md", "lg", "full"] as const;
 

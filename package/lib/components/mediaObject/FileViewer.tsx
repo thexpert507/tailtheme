@@ -10,7 +10,7 @@ import { TxtView } from "./TxtView";
 import { VideoView } from "./VideoView";
 import { MediaContextProvider, MediaContextState, useMediaContext } from "./mediaContext";
 import { twMerge } from "tailwind-merge";
-import { ROUNDED } from "@theme/utils";
+import { ROUNDED } from "@/utils";
 import { Show, useObservable } from "@legendapp/state/react";
 import { Box, Button } from "..";
 import { format } from "bytes";

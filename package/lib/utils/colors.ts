@@ -27,6 +27,15 @@ export const BG_COLORS: Record<COLORS, string> = {
   success: "bg-success",
 };
 
+export const HOVER_BG_COLORS: Record<COLORS, string> = {
+  primary: "hover:bg-primary-hover",
+  accent: "hover:bg-accent-hover",
+  warning: "hover:bg-warning-hover",
+  danger: "hover:bg-danger-hover",
+  info: "hover:bg-info-hover",
+  success: "hover:bg-success-hover",
+};
+
 export const TEXT_COLORS: Record<COLORS, string> = {
   primary: "text-primary",
   accent: "text-accent",

@@ -1,7 +1,7 @@
 import { ObservableObject } from "@legendapp/state";
 import { useEffectOnce, useObservable, useObserve } from "@legendapp/state/react";
 import { createContext, useContext } from "react";
-import { DarkTheme, BaseTheme } from "@theme/context/defaultThemes";
+import { DarkTheme, BaseTheme } from "@/context/defaultThemes";
 import { Tailtheme } from "./theme";
 
 type ThemeMode = "light" | "dark";

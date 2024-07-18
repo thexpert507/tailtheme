@@ -1,6 +1,6 @@
 import { Badge, Box, Table, TableRow, Title } from "tailtheme/components";
 
-export function Tables() {
+export default function Tables() {
   const headers = ["id", "nombre", "apellido"];
   const names = [
     {

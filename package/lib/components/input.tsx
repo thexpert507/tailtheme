@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import { forwardRef, HTMLProps, useId } from "react";
 import { BsTrashFill } from "react-icons/bs";
 import { Box } from "./box";
-import { MARGINS_X, MARGINS_Y, ROUNDED } from "@theme/utils";
+import { MARGINS_X, MARGINS_Y, ROUNDED } from "@/utils";
 
 const labelSizes = {
   "3xs": "text-xs",

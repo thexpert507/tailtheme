@@ -1,5 +1,5 @@
 import { Show, useObservable } from "@legendapp/state/react";
-import { MARGINS_X, MARGINS_Y, ROUNDED } from "@theme/utils";
+import { MARGINS_X, MARGINS_Y, ROUNDED } from "@/utils";
 import { useId, forwardRef } from "react";
 import { Box } from "./box";
 import { twMerge } from "tailwind-merge";

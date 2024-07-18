@@ -1,4 +1,4 @@
-import { TITLE } from "@theme/utils";
+import { TITLE } from "@/utils";
 import { twMerge } from "tailwind-merge";
 
 interface TitleProps {

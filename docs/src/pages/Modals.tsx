@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Box, Button, Modal, Title } from "tailtheme/components";
 
-export function Modals() {
+export default function Modals() {
   const [open, setOpen] = useState(false);
 
   const toogle = () => setOpen((prev) => !prev);

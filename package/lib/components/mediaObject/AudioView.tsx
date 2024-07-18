@@ -3,7 +3,7 @@ import { LuFileAudio } from "react-icons/lu";
 import { format, toDate, secondsToMilliseconds } from "date-fns";
 import { useMediaContext } from "./mediaContext";
 import { twMerge } from "tailwind-merge";
-import { ROUNDED } from "@theme/utils";
+import { ROUNDED } from "@/utils";
 import { Box, Button, Progress } from "..";
 import { VscDebugPause, VscPlay } from "react-icons/vsc";
 

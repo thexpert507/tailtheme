@@ -1,6 +1,6 @@
 import { Box, FileViewer, Title } from "tailtheme/components";
 
-export function Media() {
+export default function Media() {
   return (
     <Box flat full items="start" justify="start" direction="column">
       <Title size="2xl">Media</Title>

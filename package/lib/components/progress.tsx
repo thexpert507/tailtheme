@@ -1,4 +1,4 @@
-import { COLORS } from "@theme/utils";
+import { COLORS } from "@/utils";
 import { twMerge } from "tailwind-merge";
 
 const colors: Record<COLORS, string> = {

@@ -1,6 +1,6 @@
 import { Box, FileInput, FormInput, FormSelect, FormTextArea, Title } from "tailtheme/components";
 
-export function Inputs() {
+export default function Inputs() {
   return (
     <Box flat full items="start" justify="start" direction="column">
       <Title size="2xl">Inputs</Title>

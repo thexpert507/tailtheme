@@ -1,6 +1,6 @@
 import { Box, Card, Title } from "tailtheme/components";
 
-export function Cards() {
+export default function Cards() {
   return (
     <Box flat full items="start" justify="start" direction="column">
       <Title size="2xl">Cards</Title>

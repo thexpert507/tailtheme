@@ -1,4 +1,4 @@
-import { ROUNDED } from "@theme/utils";
+import { ROUNDED } from "@/utils";
 import { createContext, useContext } from "react";
 
 export interface MediaContextState {
@@ -7,7 +7,7 @@ export interface MediaContextState {
   view3d?: { showControls?: boolean };
   round?: keyof typeof ROUNDED;
   file?: { size: number };
-  rules?: { accept?: string; maxFiles?: number; maxSize?: number, openButtonText?: string };
+  rules?: { accept?: string; maxFiles?: number; maxSize?: number; openButtonText?: string };
 }
 
 const MediaContext = createContext<MediaContextState | null>(null);

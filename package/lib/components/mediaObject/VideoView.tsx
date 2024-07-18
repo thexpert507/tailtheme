@@ -1,6 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import { useMediaContext } from "./mediaContext";
-import { ROUNDED } from "@theme/utils";
+import { ROUNDED } from "@/utils";
 
 export const VideoView = () => {
   const { src, ...props } = useMediaContext();

@@ -1,6 +1,8 @@
-import { ROUNDED } from "@theme/utils";
-import { Fragment } from "react";
-import { twMerge } from "tailwind-merge";
+import { ROUNDED } from "@/utils";
+import * as React from "react";
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
+
+import { cn } from "@/utils";
 
 const avatarSizes = {
   xs: "h-6 w-6",
@@ -81,99 +83,43 @@ type AvatarProps = {
     }
 );
 
-export function Avatar(props: AvatarProps) {
-  const baseJsx = (
-    <div
-      className={twMerge(
-        "overflow-hidden",
-        props.size ? avatarSizes[props.size] : avatarSizes.md,
-        props.round ? ROUNDED[props.round] : ROUNDED.full
-      )}>
-      {props.type === "image" || props.type === "whithText" ? (
-        <Fragment>
-          {props.src ? (
-            <img
-              className="h-full w-full object-cover object-center"
-              src={props.src}
-              alt={props.name}
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center overflow-hidden bg-secondary-100">
-              <svg
-                className="h-1/2 w-1/2 text-secondary-400"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor">
-                <path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h1 1 14H20z"></path>
-              </svg>
-            </div>
-          )}
-        </Fragment>
-      ) : null}
+const Avatar = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Root
+    ref={ref}
+    className={cn("relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full", className)}
+    {...props}
+  />
+));
+Avatar.displayName = AvatarPrimitive.Root.displayName;
 
-      {props.type === "placeholder" ? (
-        <PlaceholderName name={props.name} size={props.size} />
-      ) : null}
-    </div>
-  );
+const AvatarImage = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Image>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Image>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Image
+    ref={ref}
+    className={cn("aspect-square h-full w-full", className)}
+    {...props}
+  />
+));
+AvatarImage.displayName = AvatarPrimitive.Image.displayName;
 
-  if (props.type === "whithText") {
-    const baseText = (
-      <div>
-        <div
-          className={twMerge(
-            "font-medium text-secondary-500",
-            props.size ? whithTextSizes[props.size].name : whithTextSizes.md.name,
-            props.position === "left" ? "text-right" : "text-left"
-          )}>
-          {props.name}
-        </div>
-        <div
-          className={twMerge(
-            "text-secondary-400 text-",
-            props.size ? whithTextSizes[props.size].subtitle : whithTextSizes.md.subtitle,
-            props.position === "left" ? "text-right" : "text-left"
-          )}>
-          {props.subtitle}
-        </div>
-      </div>
-    );
+const AvatarFallback = React.forwardRef<
+  React.ElementRef<typeof AvatarPrimitive.Fallback>,
+  React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
+>(({ className, ...props }, ref) => (
+  <AvatarPrimitive.Fallback
+    ref={ref}
+    className={cn(
+      "flex h-full w-full items-center justify-center rounded-full bg-muted",
+      className
+    )}
+    {...props}
+  />
+));
+AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName;
 
-    return (
-      <div className="flex flex-wrap items-center justify-center gap-3">
-        {props.position === "left" ? (
-          <Fragment>
-            {baseText}
-            {baseJsx}
-          </Fragment>
-        ) : null}
-
-        {props.position === "right" ? (
-          <Fragment>
-            {baseJsx}
-            {baseText}
-          </Fragment>
-        ) : null}
-
-        {!props.position ? (
-          <Fragment>
-            {baseJsx}
-            {baseText}
-          </Fragment>
-        ) : null}
-      </div>
-    );
-  } else return baseJsx;
-}
-
-function PlaceholderName(props: { name: string; size?: keyof typeof placeholderTextSizes }) {
-  const [firstName, lastName] = props.name.split(" ");
-  return (
-    <div className="flex h-full w-full items-center justify-center overflow-hidden bg-secondary-100 text-secondary-400">
-      <span className={placeholderTextSizes[props.size ?? "md"]}>
-        {firstName?.[0]}
-        {lastName?.[0]}
-      </span>
-    </div>
-  );
-}
+export { Avatar, AvatarImage, AvatarFallback };

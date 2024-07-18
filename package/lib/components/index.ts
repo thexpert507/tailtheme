@@ -1,3 +1,5 @@
+export * from "./MenuBar";
+export * from "./accordion";
 export * from "./avatar";
 export * from "./badge";
 export * from "./box";
@@ -12,6 +14,7 @@ export * from "./mediaObject";
 export * from "./modal";
 export * from "./navbar";
 export * from "./progress";
+export * from "./resizable";
 export * from "./select";
 export * from "./switch";
 export * from "./table";

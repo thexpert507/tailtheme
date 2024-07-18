@@ -15,6 +15,7 @@ export default defineConfig({
         context: "./lib/context/index.ts",
         config: "./lib/config/index.ts",
         preset: "./lib/preset.ts",
+        icons: "./lib/icons.ts",
       },
       name: "tailtheme",
       formats: ["es", "cjs"],
@@ -45,7 +46,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@theme": resolve(__dirname, "./lib"),
+      "@": resolve(__dirname, "./lib"),
     },
   },
   plugins: [dts(), react()],

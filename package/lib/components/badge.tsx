@@ -1,5 +1,11 @@
-import { COLORS, ROUNDED } from "@theme/utils";
-import { BG_COLORS, TEXT_CONTRAST_COLORS, TEXT_COLORS, BORDER_COLORS, SOFT_COLORS } from "@theme/utils/colors";
+import { COLORS, ROUNDED } from "@/utils";
+import {
+  BG_COLORS,
+  TEXT_CONTRAST_COLORS,
+  TEXT_COLORS,
+  BORDER_COLORS,
+  SOFT_COLORS,
+} from "@/utils/colors";
 import { twMerge } from "tailwind-merge";
 
 function Variant(color: COLORS): Record<Variants, string> {
@@ -24,6 +30,7 @@ interface BadgeProps {
   testId?: string;
   variant?: Variants;
   onClose?: () => void;
+  className?: string;
 }
 export function Badge(props: BadgeProps) {
   return (
@@ -37,7 +44,8 @@ export function Badge(props: BadgeProps) {
         props.closable && "inline-flex items-center gap-1",
         props.block && "block",
         props.width && twMerge(props.width, "truncate"),
-        props.truncate && "truncate"
+        props.truncate && "truncate",
+        props.className
       )}>
       {props.children}
 

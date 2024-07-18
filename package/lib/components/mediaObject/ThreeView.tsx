@@ -8,7 +8,7 @@ import { Box, Button } from "..";
 import { VscArrowDown } from "react-icons/vsc";
 import { Memo, useObservable } from "@legendapp/state/react";
 import { Box3, PerspectiveCamera as Camera, Group, Object3D } from "three";
-import { ROUNDED } from "@theme/utils";
+import { ROUNDED } from "@/utils";
 import { MediaContextState } from "./mediaContext";
 
 function Loader() {

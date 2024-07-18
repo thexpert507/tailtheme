@@ -1,14 +1,15 @@
-import { ROUNDED, TooltipPlacement, COLORS } from "@theme/utils";
+import { ROUNDED, TooltipPlacement, COLORS } from "@/utils";
 import { twMerge } from "tailwind-merge";
 import { MouseEvent, useRef } from "react";
 import { Tooltip } from "./tooltip";
 import {
   BORDER_COLORS,
+  HOVER_BG_COLORS,
   HOVER_SOFT_COLORS,
   RING_FOCUS_COLORS,
   SOFT_COLORS,
   TEXT_COLORS,
-} from "@theme/utils/colors";
+} from "@/utils/colors";
 
 const colors: Record<COLORS, string> = {
   primary:
@@ -27,7 +28,7 @@ const colors: Record<COLORS, string> = {
 function Variant(color: COLORS) {
   return {
     text: `border-transparent bg-transparent text-background-contrast ${HOVER_SOFT_COLORS[color]} ring-transparent transition-all duration-300`,
-    outlined: `bg-transparent ${TEXT_COLORS[color]} ${BORDER_COLORS[color]} ${RING_FOCUS_COLORS[color]}`,
+    outlined: `bg-transparent ${TEXT_COLORS[color]} ${BORDER_COLORS[color]} ${RING_FOCUS_COLORS[color]} ${HOVER_SOFT_COLORS[color]}`,
     contained: `border border-transparent ${colors[color]}`,
     ghost: `border border-transparent ${SOFT_COLORS[color]} focus:ring focus:ring-${color}-focus`,
     grouped: `border-none border-transparent bg-transparent shadow-none`,
@@ -65,6 +66,7 @@ interface ButtonProps {
   preventDefault?: boolean;
   stopPropagation?: boolean;
   testId?: string;
+  className?: string;
 }
 export function Button(props: ButtonProps) {
   const buttonRef = useRef(null);
@@ -85,7 +87,8 @@ export function Button(props: ButtonProps) {
         props.variant && Variant(props.color ?? "primary")[props.variant],
         props.size ? sizes[props.size] : sizes.md,
         props.color && props.variant === "contained" && colors[props.color],
-        props.fullWidth && "w-full"
+        props.fullWidth && "w-full",
+        props.className
       )}>
       {props.children}
       {props.tooltip && (

@@ -2,7 +2,7 @@ import { format } from "date-fns";
 import { twMerge } from "tailwind-merge";
 import { FileViewer } from "./mediaObject";
 import { Badge } from "./badge";
-import { ANIMATIONS, Animations } from "@theme/utils";
+import { ANIMATIONS, Animations } from "@/utils";
 
 interface CardProps {
   metadata?: { author?: string; date?: Date };

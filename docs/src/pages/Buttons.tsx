@@ -1,6 +1,6 @@
 import { Box, Button, Title } from "tailtheme/components";
 
-export function Buttons() {
+export default function Buttons() {
   const colors = ["primary", "accent", "danger", "warning", "success", "info"] as const;
   const rounds = ["none", "sm", "md", "lg", "full"] as const;
   const sizes = ["3xs", "2xs", "xs", "sm", "md", "lg", "xl"] as const;

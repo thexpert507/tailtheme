@@ -1,4 +1,4 @@
-import { useThemeContext } from "@theme/context";
+import { useThemeContext } from "@/context";
 
 export function useThemeState() {
   const { data$ } = useThemeContext();

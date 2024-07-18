@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 import { useState } from "react";
 import { DarkThemeSwitch } from "./darkThemeSwitch";
 import { Box } from "./box";
-import { PADDING_Y } from "@theme/utils";
+import { PADDING_Y } from "@/utils";
 
 interface NavProps {
   children?: React.ReactNode;

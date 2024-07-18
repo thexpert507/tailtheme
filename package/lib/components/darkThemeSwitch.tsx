@@ -1,5 +1,5 @@
 import { Show, useComputed } from "@legendapp/state/react";
-import { useThemeContext } from "@theme/context";
+import { useThemeContext } from "@/context";
 import { FiSun, FiMoon } from "react-icons/fi";
 
 export function DarkThemeSwitch() {

@@ -1,7 +1,7 @@
 {
   "name": "tailtheme",
   "private": false,
-  "version": "1.2.0",
+  "version": "1.2.2",
   "type": "module",
   "license": "Apache-2.0",
   "access": "public",
@@ -39,6 +39,11 @@
       "import": "./dist/preset.es.js",
       "require": "./dist/preset.cjs.js",
       "types": "./dist/preset.d.ts"
+    },
+    "./icons": {
+      "import": "./dist/icons.es.js",
+      "require": "./dist/icons.cjs.js",
+      "types": "./dist/icons.d.ts"
     }
   },
   "typesVersions": {
@@ -60,6 +65,9 @@
       ],
       "preset": [
         "./dist/preset.d.ts"
+      ],
+      "icons": [
+        "./dist/icons.d.ts"
       ]
     }
   },
@@ -72,18 +80,24 @@
   },
   "dependencies": {
     "@legendapp/state": "^1.11.3",
+    "@radix-ui/react-accordion": "^1.2.0",
+    "@radix-ui/react-avatar": "^1.0.4",
+    "@radix-ui/react-menubar": "^1.0.4",
     "@react-three/drei": "9.88.9",
     "@react-three/fiber": "8.15.9",
     "axios": "^1.5.1",
     "bytes": "^3.1.2",
+    "clsx": "^2.1.1",
     "color": "^4.2.3",
     "date-fns": "^2.30.0",
     "immer": "^10.1.1",
+    "lucide-react": "^0.395.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropdown-select": "^4.10.0",
     "react-hook-form": "^7.47.0",
     "react-icons": "^4.11.0",
+    "react-resizable-panels": "^2.0.19",
     "tailwind-merge": "^1.14.0",
     "three": "^0.158.0"
   },

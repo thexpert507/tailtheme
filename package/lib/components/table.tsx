@@ -1,4 +1,4 @@
-import { ROUNDED, SHADOW } from "@theme/utils";
+import { ROUNDED, SHADOW } from "@/utils";
 import { ReactNode, useEffect, useRef } from "react";
 import { twMerge } from "tailwind-merge";
 
