@@ -1,6 +1,6 @@
 import { ROUNDED, TooltipPlacement, COLORS } from "@/utils";
 import { twMerge } from "tailwind-merge";
-import { MouseEvent, useRef } from "react";
+import { MouseEvent, useRef, forwardRef } from "react";
 import { Tooltip } from "./tooltip";
 import {
   BORDER_COLORS,
@@ -68,12 +68,12 @@ interface ButtonProps {
   testId?: string;
   className?: string;
 }
-export function Button(props: ButtonProps) {
-  const buttonRef = useRef(null);
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   return (
     <button
       data-testid={props.testId}
-      ref={buttonRef}
+      ref={ref}
       disabled={props.disabled}
       type={props.type ?? "button"}
       onClick={(e) => {
@@ -91,11 +91,13 @@ export function Button(props: ButtonProps) {
         props.className
       )}>
       {props.children}
-      {props.tooltip && (
-        <Tooltip placement={props.tooltip.placement} elementRef={buttonRef}>
+      {/* {props.tooltip && (
+        <Tooltip placement={props.tooltip.placement} elementRef={ref}>
           {props.tooltip.children}
         </Tooltip>
-      )}
+      )} */}
     </button>
   );
-}
+});
+
+export { Button };

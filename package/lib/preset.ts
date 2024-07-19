@@ -2,6 +2,7 @@ import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import formPlugin from "@tailwindcss/forms";
 import typographyPlugin from "@tailwindcss/typography";
+import animate from "tailwindcss-animate";
 import { ContentConfig } from "tailwindcss/types/config";
 
 type PresetConfig = {
@@ -23,16 +24,11 @@ export default function (config: PresetConfig) {
         fontFamily: { sans: ["Inter", ...fontFamily.sans] },
 
         animation: {
-          "fade-in": "fade-in 0.3s ease-in-out",
           "accordion-down": "accordion-down 0.2s ease-out",
           "accordion-up": "accordion-up 0.2s ease-out",
         },
 
         keyframes: {
-          "fade-in": {
-            "0%": { opacity: "0" },
-            "100%": { opacity: "1" },
-          },
           "accordion-down": {
             from: { height: "0" },
             to: { height: "var(--radix-accordion-content-height)" },
@@ -109,6 +105,6 @@ export default function (config: PresetConfig) {
         },
       },
     },
-    plugins: [formPlugin, typographyPlugin],
+    plugins: [formPlugin, typographyPlugin, animate],
   } as Config;
 }
