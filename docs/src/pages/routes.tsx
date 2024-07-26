@@ -11,6 +11,7 @@ const Cards = lazy(() => import("./Cards"));
 const Modals = lazy(() => import("./Modals"));
 const Tables = lazy(() => import("./Tables"));
 const Accordion = lazy(() => import("./Accordion"));
+const Select = lazy(() => import("./Select"));
 
 // eslint-disable-next-line react-refresh/only-export-components
 
@@ -97,6 +98,14 @@ export const ROUTES = [
     component: (
       <Suspense fallback={<div>Loading...</div>}>
         <Accordion />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/select",
+    component: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Select />
       </Suspense>
     ),
   },

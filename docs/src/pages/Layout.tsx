@@ -75,6 +75,11 @@ const links = [
     Icon: TableProperties,
     to: "/tables",
   },
+  {
+    label: "Select",
+    Icon: ChevronDown,
+    to: "/select",
+  },
 ] satisfies Link[];
 
 type LayoutProps = { children: React.ReactNode };

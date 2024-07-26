@@ -18,6 +18,24 @@ export const HOVER_SOFT_COLORS: Record<COLORS, string> = {
   success: "hover:bg-success-soft hover:text-success-soft-contrast",
 };
 
+export const FOCUS_COLORS: Record<COLORS, string> = {
+  primary: "focus:bg-primary focus:text-primary-contrast",
+  accent: "focus:bg-accent focus:text-accent-contrast",
+  warning: "focus:bg-warning focus:text-warning-contrast",
+  danger: "focus:bg-danger focus:text-danger-contrast",
+  info: "focus:bg-info focus:text-info-contrast",
+  success: "focus:bg-success focus:text-success-contrast",
+};
+
+export const FOCUS_SOFT_COLORS: Record<COLORS, string> = {
+  primary: "focus:bg-primary-soft focus:text-primary-soft-contrast",
+  accent: "focus:bg-accent-soft focus:text-accent-soft-contrast",
+  warning: "focus:bg-warning-soft focus:text-warning-soft-contrast",
+  danger: "focus:bg-danger-soft focus:text-danger-soft-contrast",
+  info: "focus:bg-info-soft focus:text-info-soft-contrast",
+  success: "focus:bg-success-soft focus:text-success-soft-contrast",
+};
+
 export const BG_COLORS: Record<COLORS, string> = {
   primary: "bg-primary",
   accent: "bg-accent",

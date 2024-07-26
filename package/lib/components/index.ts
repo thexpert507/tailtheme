@@ -17,6 +17,7 @@ export * from "./modal";
 export * from "./navbar";
 export * from "./progress";
 export * from "./resizable";
+export * from "./select-old";
 export * from "./select";
 export * from "./switch";
 export * from "./table";

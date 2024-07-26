@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,39 +15,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  Modal,
   Title,
   DarkThemeSwitch,
 } from "tailtheme/components";
 import { Dialog } from "tailtheme/components";
 
 export default function Modals() {
-  const [open, setOpen] = useState(false);
-
-  const toogle = () => setOpen((prev) => !prev);
-
   return (
     <Box flat full items="start" justify="start" direction="column">
       <Title size="2xl">Modales</Title>
 
       <DarkThemeSwitch />
-
-      <Box>
-        <Modal
-          open={open}
-          onClose={toogle}
-          title="Base modal"
-          enableConfirm
-          enableCancel
-          size="2xl"
-          animation="fade-in">
-          <div>Contenido del modal</div>
-        </Modal>
-
-        <Button variant="contained" round="md" size="md" onClick={toogle}>
-          Abrir modal base
-        </Button>
-      </Box>
 
       <Box>
         <Dialog>
