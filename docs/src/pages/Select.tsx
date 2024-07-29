@@ -1,6 +1,8 @@
 import {
   Box,
   DarkThemeSwitch,
+  Form,
+  FormInput,
   Select,
   SelectContent,
   SelectGroup,
@@ -19,16 +21,19 @@ export default function SelectPage() {
       <DarkThemeSwitch />
 
       <Box marginY="2xl">
-        <Select>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Theme" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="light">Light</SelectItem>
-            <SelectItem value="dark">Dark</SelectItem>
-            <SelectItem value="system">System</SelectItem>
-          </SelectContent>
-        </Select>
+        <Form className="w-[280px]">
+          <FormInput isize="sm" round="sm" placeholder="Name" />
+          <Select>
+            <SelectTrigger round="sm" size="sm">
+              <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent round="sm">
+              <SelectItem value="light">Light</SelectItem>
+              <SelectItem value="dark">Dark</SelectItem>
+              <SelectItem value="system">System</SelectItem>
+            </SelectContent>
+          </Select>
+        </Form>
       </Box>
 
       <Box marginY="2xl">

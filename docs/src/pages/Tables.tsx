@@ -1,4 +1,18 @@
-import { Badge, Box, Table, TableRow, Title } from "tailtheme/components";
+import {
+  Badge,
+  Box,
+  DarkThemeSwitch,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableOld,
+  TableRow,
+  TableRowOld,
+  Title,
+} from "tailtheme/components";
 
 export default function Tables() {
   const headers = ["id", "nombre", "apellido"];
@@ -106,20 +120,52 @@ export default function Tables() {
   ];
 
   const components = names.map((name) => (
-    <TableRow key={name.id}>
+    <TableRowOld key={name.id}>
       <Badge color="primary">{name.id}</Badge>
       <Badge color="primary">{name.nombre}</Badge>
       <Badge color="primary">{name.apellido}</Badge>
-    </TableRow>
+    </TableRowOld>
   ));
 
   return (
     <Box flat full items="start" justify="start" direction="column">
       <Title size="2xl">Tablas</Title>
 
-      <Box full items="start" direction="column" marginY="lg">
+      <DarkThemeSwitch />
+
+      <Box full items="start" direction="column" marginY="lg" paddingX="xs" paddingY="xs">
         <Title size="xl">Tabla simple</Title>
-        <Table
+        <Table round="md" height="h-[200px]" bordered>
+          <TableCaption>A list of your recent invoices.</TableCaption>
+          <TableHeader sticky>
+            <TableRow>
+              <TableHead className="w-[100px]">ID</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Last name</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {names.map((name) => (
+              <TableRow key={name.id}>
+                <TableCell className="font-medium">
+                  <Badge>{name.id}</Badge>
+                </TableCell>
+                <TableCell>{name.nombre}</TableCell>
+                <TableCell>{name.apellido}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
+
+      <Box full items="start" direction="column" marginY="lg">
+        <Box>
+          <Title size="xl">Tabla simple</Title>
+          <Badge variant="ghost" color="danger" round="full">
+            Deprecated
+          </Badge>
+        </Box>
+        <TableOld
           width="w-full"
           height="h-[200px]"
           round="md"
@@ -130,8 +176,13 @@ export default function Tables() {
       </Box>
 
       <Box full items="start" direction="column" marginY="lg">
-        <Title size="xl">Header sticky</Title>
-        <Table
+        <Box>
+          <Title size="xl">Header sticky</Title>
+          <Badge variant="ghost" color="danger" round="full">
+            Deprecated
+          </Badge>
+        </Box>
+        <TableOld
           width="w-full"
           height="h-[200px]"
           round="md"

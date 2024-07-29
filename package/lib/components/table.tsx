@@ -1,106 +1,126 @@
-import { ROUNDED, SHADOW } from "@/utils";
-import { ReactNode, useEffect, useRef } from "react";
-import { twMerge } from "tailwind-merge";
+import * as React from "react";
 
-interface TableProps {
-  headers?: ReactNode | ReactNode[];
-  items?: ReactNode[][];
-  components?: ReactNode[] | ReactNode;
+import { ROUNDED, SHADOW, cn } from "@/utils";
+
+type TableProps = React.HTMLAttributes<HTMLTableElement> & {
+  bordered?: boolean;
   height?: string;
   width?: string;
-  bordered?: boolean;
   round?: keyof typeof ROUNDED;
   shadow?: keyof typeof SHADOW;
-  scrollToBottom?: boolean;
-  stickyHeader?: boolean;
-  testId?: string;
-}
-export function Table(props: TableProps) {
-  const ref = useRef<HTMLDivElement>(null);
+};
 
-  useEffect(() => {
-    if (!props.scrollToBottom) return;
-    if (!ref.current) return;
-    const div = ref.current;
-    div.scrollTop = div.scrollHeight;
-    div.addEventListener("DOMSubtreeModified", () => {
-      div.scrollTop = div.scrollHeight;
-    });
-  }, [props.scrollToBottom]);
-
-  return (
+const Table = React.forwardRef<HTMLTableElement, TableProps>(
+  ({ className, round, bordered, shadow, height, width, ...props }, ref) => (
     <div
-      ref={ref}
-      data-testid={props.testId}
-      className={twMerge(
-        "border",
-        props.height && twMerge("overflow-y-scroll", props.height),
-        props.width && twMerge("overflow-x-scroll", props.width),
-        props.bordered && "border-background-secondary",
-        props.round && ROUNDED[props.round],
-        props.shadow && SHADOW[props.shadow]
+      className={cn(
+        "relative w-full overflow-auto border",
+        "text-background-contrast",
+        width && cn("overflow-x-scroll", width),
+        height && cn("overflow-y-scroll", height),
+        bordered && "border-background-secondary",
+        round ? ROUNDED[round] : ROUNDED.none,
+        shadow ? SHADOW[shadow] : SHADOW.none
       )}>
-      <table className="w-full h-full border-collapse bg-background-primary text-left text-sm text-background-contrast">
-        <thead
-          className={twMerge("bg-background-secondary", props.stickyHeader && "sticky top-0 z-10")}>
-          <tr>
-            {Array.isArray(props.headers) ? (
-              props.headers.map((header, index) => (
-                <th
-                  key={index}
-                  scope="col"
-                  className="px-6 py-4 font-medium text-background-contrast">
-                  {header}
-                </th>
-              ))
-            ) : (
-              <th className="px-6 py-4 font-medium text-background-contrast">{props.headers}</th>
-            )}
-          </tr>
-        </thead>
-        <tbody
-          className={twMerge(
-            "divide-y divide-background-secondary border-t border-background-secondary"
-          )}>
-          {props.items?.map((item, index) => (
-            <tr key={index} className="hover:bg-background-secondary">
-              {item.map((td, index) => (
-                <td key={index} className="px-6 py-4">
-                  {td}
-                </td>
-              ))}
-            </tr>
-          ))}
-          {props.components}
-        </tbody>
-      </table>
+      <table ref={ref} className={cn("w-full caption-bottom text-sm", className)} {...props} />
     </div>
-  );
-}
+  )
+);
+Table.displayName = "Table";
 
-interface TableRowProps {
-  onClick?: () => void;
-  children?: ReactNode[] | ReactNode;
-  testId?: string;
-}
-export function TableRow({ children, onClick, testId }: TableRowProps) {
-  return (
-    <tr
-      data-testid={testId}
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick && onClick();
-      }}
-      className="hover:bg-background-secondary">
-      {Array.isArray(children) ? (
-        children.map((td, index) => (
-          <td key={index} className="px-6 py-4">
-            {td}
-          </td>
-        ))
-      ) : (
-        <td className="px-6 py-4">{children}</td>
+type TableHeaderProps = React.HTMLAttributes<HTMLTableSectionElement> & {
+  bordered?: boolean;
+  sticky?: boolean;
+};
+const TableHeader = React.forwardRef<HTMLTableSectionElement, TableHeaderProps>(
+  ({ className, bordered, sticky, ...props }, ref) => (
+    <thead
+      ref={ref}
+      className={cn(
+        bordered && "[&_tr]:border-b",
+        "bg-background-secondary",
+        sticky && "sticky top-0 z-10",
+        className
       )}
-    </tr>
-  );
-}
+      {...props}
+    />
+  )
+);
+TableHeader.displayName = "TableHeader";
+
+const TableBody = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tbody ref={ref} className={cn("[&_tr:last-child]:border-0", className)} {...props} />
+));
+TableBody.displayName = "TableBody";
+
+const TableFooter = React.forwardRef<
+  HTMLTableSectionElement,
+  React.HTMLAttributes<HTMLTableSectionElement>
+>(({ className, ...props }, ref) => (
+  <tfoot
+    ref={ref}
+    className={cn("border-t bg-muted/50 font-medium [&>tr]:last:border-b-0", className)}
+    {...props}
+  />
+));
+TableFooter.displayName = "TableFooter";
+
+const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTMLTableRowElement>>(
+  ({ className, ...props }, ref) => (
+    <tr
+      ref={ref}
+      className={cn(
+        "border-b transition-colors data-[state=selected]:bg-background-secondary",
+        "border-background-secondary",
+        "hover:bg-background-secondary transition-all duration-300",
+        className
+      )}
+      {...props}
+    />
+  )
+);
+TableRow.displayName = "TableRow";
+
+const TableHead = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <th
+    ref={ref}
+    className={cn(
+      "h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0",
+      className
+    )}
+    {...props}
+  />
+));
+TableHead.displayName = "TableHead";
+
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  React.TdHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <td
+    ref={ref}
+    className={cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className)}
+    {...props}
+  />
+));
+TableCell.displayName = "TableCell";
+
+const TableCaption = React.forwardRef<
+  HTMLTableCaptionElement,
+  React.HTMLAttributes<HTMLTableCaptionElement>
+>(({ className, ...props }, ref) => (
+  <caption
+    ref={ref}
+    className={cn("mt-2 mb-2 text-sm text-background-contrast opacity-50", className)}
+    {...props}
+  />
+));
+TableCaption.displayName = "TableCaption";
+
+export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption };

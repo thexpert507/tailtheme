@@ -2,7 +2,37 @@ import * as React from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 
-import { COLORS, FOCUS_SOFT_COLORS, cn } from "@/utils";
+import { COLORS, FOCUS_SOFT_COLORS, ROUNDED, cn } from "@/utils";
+
+const labelSizes = {
+  "3xs": "text-xs",
+  "2xs": "text-xs",
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-sm",
+  lg: "text-sm",
+  xl: "text-sm",
+};
+
+const textSizes = {
+  "3xs": "text-xs",
+  "2xs": "text-xs",
+  xs: "text-xs",
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg",
+  xl: "text-xl",
+};
+
+const sizes = {
+  "3xs": `my-0.5 px-1 py-0.5 ${textSizes["3xs"]}`,
+  "2xs": `my-0.5 px-2 py-1 ${textSizes["2xs"]}`,
+  xs: `my-0.5 px-2 py-1.5 ${textSizes.xs}`,
+  sm: `my-1 px-2 py-2 ${textSizes.sm}`,
+  md: `my-1 px-3 py-2.5 ${textSizes.md}`,
+  lg: `my-1 px-3 py-3 ${textSizes.lg}`,
+  xl: `my-1 px-3 py-4 ${textSizes.xl}`,
+};
 
 const Select = SelectPrimitive.Root;
 
@@ -10,18 +40,23 @@ const SelectGroup = SelectPrimitive.Group;
 
 const SelectValue = SelectPrimitive.Value;
 
+type SelectTriggerProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & {
+  size?: keyof typeof sizes;
+  round?: keyof typeof ROUNDED;
+};
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
+  SelectTriggerProps
+>(({ className, children, size, round, ...props }, ref) => (
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center justify-between",
-      "rounded-md border border-input",
-      "bg-background-primary text-background-contrast px-3 py-2",
-      "text-sm ring-offset-background placeholder:text-muted-foreground",
-      "focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+      "flex w-full items-center justify-between",
+      "border border-primary focus:border-primary-focus",
+      "bg-background-primary text-background-contrast",
+      size ? sizes[size] : sizes.md,
+      round ? ROUNDED[round] : ROUNDED.md,
+      "focus:outline-none focus:ring focus:ring-primary-ring focus:ring-offset-2",
       "disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className
     )}
@@ -60,16 +95,21 @@ const SelectScrollDownButton = React.forwardRef<
 ));
 SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
 
+type SelectContentProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content> & {
+  round?: keyof typeof ROUNDED;
+};
+
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = "popper", ...props }, ref) => (
+  SelectContentProps
+>(({ className, children, position = "popper", round, ...props }, ref) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
         "relative z-50 max-h-96 min-w-[8rem]",
-        "overflow-hidden rounded-md border ",
+        "overflow-hidden border",
+        round ? ROUNDED[round] : ROUNDED.md,
         "bg-background-primary text-background-contrast",
         "shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",

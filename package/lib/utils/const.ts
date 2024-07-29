@@ -13,6 +13,7 @@ export const SHADOW = {
   xl: "shadow-xl",
   "2xl": "shadow-2xl",
   inner: "shadow-inner",
+  none: "shadow-none",
 };
 
 export const ITEMS = {

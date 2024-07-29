@@ -20,6 +20,7 @@ export * from "./resizable";
 export * from "./select-old";
 export * from "./select";
 export * from "./switch";
+export * from "./table-old";
 export * from "./table";
 export * from "./textarea";
 export * from "./title";

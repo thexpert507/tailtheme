@@ -93,7 +93,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>((props, re
             props.leftIcon && "pl-10",
             props.round ? ROUNDED[props.round] : ROUNDED.md,
             props.isize ? sizes[props.isize] : sizes.md,
-            "focus:border-primary-focus focus:ring focus:ring-primary-focus focus:ring-opacity-50",
+            "focus:border-primary-focus focus:ring focus:ring-primary-focus focus:ring-offset-2",
             "disabled:cursor-not-allowed disabled:bg-primary-disabled disabled:text-primary-disabled",
             "block w-full bg-background-primary border-primary shadow-sm"
           )}
