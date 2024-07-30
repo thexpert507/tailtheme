@@ -1,10 +1,8 @@
-import { ROUNDED, TooltipPlacement, COLORS } from "@/utils";
-import { twMerge } from "tailwind-merge";
-import { MouseEvent, useRef, forwardRef } from "react";
-import { Tooltip } from "./tooltip";
+import { ROUNDED, TooltipPlacement, COLORS, cn } from "@/utils";
+import { Slot } from "@radix-ui/react-slot";
+import { MouseEvent, forwardRef } from "react";
 import {
   BORDER_COLORS,
-  HOVER_BG_COLORS,
   HOVER_SOFT_COLORS,
   RING_FOCUS_COLORS,
   SOFT_COLORS,
@@ -52,7 +50,7 @@ type TooltipProps = {
   children?: string;
 };
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   round?: keyof typeof ROUNDED;
   color?: COLORS;
@@ -62,41 +60,53 @@ interface ButtonProps {
   type?: "button" | "submit" | "reset";
   fullWidth?: boolean;
   tooltip?: TooltipProps;
-  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   preventDefault?: boolean;
   stopPropagation?: boolean;
   testId?: string;
   className?: string;
+  asChild?: boolean;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((cprops, ref) => {
+  const {
+    testId,
+    asChild = false,
+    round,
+    color,
+    variant,
+    size,
+    disabled,
+    fullWidth,
+    tooltip,
+    preventDefault,
+    stopPropagation,
+    className,
+    ...props
+  } = cprops;
+  const Comp = asChild ? Slot : "button";
   return (
-    <button
-      data-testid={props.testId}
+    <Comp
+      data-testid={testId}
       ref={ref}
-      disabled={props.disabled}
+      disabled={disabled}
       type={props.type ?? "button"}
-      onClick={(e) => {
-        props.preventDefault && e.preventDefault();
-        props.stopPropagation && e.stopPropagation();
+      onClick={(e: MouseEvent<HTMLButtonElement>) => {
+        preventDefault && e.preventDefault();
+        stopPropagation && e.stopPropagation();
         props.onClick && props.onClick(e);
       }}
-      className={twMerge(
-        "relative border text-center font-medium transition-all focus:ring disabled:cursor-not-allowed flex items-center justify-center gap-2",
-        props.round ? ROUNDED[props.round] : ROUNDED.none,
-        props.variant && Variant(props.color ?? "primary")[props.variant],
-        props.size ? sizes[props.size] : sizes.md,
-        props.color && props.variant === "contained" && colors[props.color],
-        props.fullWidth && "w-full",
-        props.className
-      )}>
+      className={cn(
+        "border text-center font-medium transition-all focus:ring disabled:cursor-not-allowed flex items-center justify-center gap-2",
+        round ? ROUNDED[round] : ROUNDED.none,
+        variant && Variant(color ?? "primary")[variant],
+        size ? sizes[size] : sizes.md,
+        color && variant === "contained" && colors[color],
+        fullWidth && "w-full",
+        className
+      )}
+      {...props}>
       {props.children}
-      {/* {props.tooltip && (
-        <Tooltip placement={props.tooltip.placement} elementRef={ref}>
-          {props.tooltip.children}
-        </Tooltip>
-      )} */}
-    </button>
+    </Comp>
   );
 });
 

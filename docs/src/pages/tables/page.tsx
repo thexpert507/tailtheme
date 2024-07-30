@@ -2,6 +2,7 @@ import {
   Badge,
   Box,
   DarkThemeSwitch,
+  DataTableProvider,
   Table,
   TableBody,
   TableCaption,
@@ -13,6 +14,7 @@ import {
   TableRowOld,
   Title,
 } from "tailtheme/components";
+import { DemoDataTable, columns, payments } from "./data-table";
 
 export default function Tables() {
   const headers = ["id", "nombre", "apellido"];
@@ -156,6 +158,13 @@ export default function Tables() {
             ))}
           </TableBody>
         </Table>
+      </Box>
+
+      <Box full items="start" direction="column" marginY="lg" paddingX="xs" paddingY="xs">
+        <Title size="xl">Tabla de datos</Title>
+        <DataTableProvider columns={columns} data={payments}>
+          <DemoDataTable />
+        </DataTableProvider>
       </Box>
 
       <Box full items="start" direction="column" marginY="lg">

@@ -41,6 +41,7 @@ export default defineConfig({
         "tailwindcss/defaultTheme",
         "@tailwindcss/typography",
         "@tailwindcss/forms",
+        "@tanstack/react-table",
       ],
     },
   },

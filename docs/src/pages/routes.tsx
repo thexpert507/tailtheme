@@ -9,7 +9,7 @@ const Forms = lazy(() => import("./Inputs"));
 const Badges = lazy(() => import("./Badges"));
 const Cards = lazy(() => import("./Cards"));
 const Modals = lazy(() => import("./Modals"));
-const Tables = lazy(() => import("./Tables"));
+const Tables = lazy(() => import("./tables/page"));
 const Accordion = lazy(() => import("./Accordion"));
 const Select = lazy(() => import("./Select"));
 
