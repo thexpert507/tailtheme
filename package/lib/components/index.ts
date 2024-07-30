@@ -22,6 +22,7 @@ export * from "./progress";
 export * from "./resizable";
 export * from "./select-old";
 export * from "./select";
+export * from "./skeleton";
 export * from "./switch";
 export * from "./table-old";
 export * from "./table";

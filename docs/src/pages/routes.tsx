@@ -12,6 +12,7 @@ const Modals = lazy(() => import("./Modals"));
 const Tables = lazy(() => import("./tables/page"));
 const Accordion = lazy(() => import("./Accordion"));
 const Select = lazy(() => import("./Select"));
+const Skeleton = lazy(() => import("./Skeleton"));
 
 // eslint-disable-next-line react-refresh/only-export-components
 
@@ -106,6 +107,14 @@ export const ROUTES = [
     component: (
       <Suspense fallback={<div>Loading...</div>}>
         <Select />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/skeleton",
+    component: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Skeleton />
       </Suspense>
     ),
   },

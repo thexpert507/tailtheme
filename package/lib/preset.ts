@@ -40,6 +40,11 @@ export default function (config: PresetConfig) {
         },
 
         colors: {
+          muted: {
+            DEFAULT: "hsl(210 40% 96.1%)",
+            foreground: "hsl(215.4 16.3% 46.9%)",
+          },
+
           primary: "var(--color-primary)",
           "primary-soft": "var(--color-primary-soft)",
           "primary-soft-contrast": "var(--color-primary-soft-contrast)",

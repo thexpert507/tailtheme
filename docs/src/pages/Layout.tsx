@@ -80,6 +80,11 @@ const links = [
     Icon: ChevronDown,
     to: "/select",
   },
+  {
+    label: "Skeleton",
+    Icon: User,
+    to: "/skeleton",
+  },
 ] satisfies Link[];
 
 type LayoutProps = { children: React.ReactNode };
