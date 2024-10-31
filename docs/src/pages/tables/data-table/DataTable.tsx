@@ -53,7 +53,12 @@ export function DemoDataTable<TData>() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <DataTable />
+      <DataTable
+        props={{
+          bodyRow: { className: "my-0" },
+          cell: { className: "py-2" },
+        }}
+      />
       <div className="flex items-center justify-end space-x-2 py-4">
         <Button
           variant="outlined"

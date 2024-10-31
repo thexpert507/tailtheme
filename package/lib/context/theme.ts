@@ -9,6 +9,19 @@ export type TailthemeColor = {
   softContrast: string;
 };
 
+export type BackgroundColor = {
+  primary: string;
+  secondary: string;
+  contrast: string;
+};
+
+export type NeutralColors = {
+  primary: string;
+  secondary: string;
+  tertiary: string;
+  quaternary: string;
+};
+
 export type Tailtheme = {
   colors: {
     primary: TailthemeColor;
@@ -17,16 +30,7 @@ export type Tailtheme = {
     success: TailthemeColor;
     warning: TailthemeColor;
     danger: TailthemeColor;
-    neutral: {
-      primary: string;
-      secondary: string;
-      tertiary: string;
-      quaternary: string;
-    };
-    background: {
-      primary: string;
-      secondary: string;
-      contrast: string;
-    }
+    neutral: NeutralColors;
+    background: BackgroundColor;
   };
 };

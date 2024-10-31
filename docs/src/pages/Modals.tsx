@@ -17,6 +17,10 @@ import {
   DialogTrigger,
   Title,
   DarkThemeSwitch,
+  TooltipProvider,
+  TooltipTrigger,
+  Tooltip,
+  TooltipContent,
 } from "tailtheme/components";
 import { Dialog } from "tailtheme/components";
 
@@ -30,9 +34,16 @@ export default function Modals() {
       <Box>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant="contained" round="md" size="md">
-              Abrir dialog
-            </Button>
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="contained" round="md" size="md">
+                    Abrir dialog
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={18}>Tooltip</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </DialogTrigger>
           <DialogContent size="2xl" round="md">
             <DialogHeader>

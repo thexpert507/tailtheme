@@ -85,6 +85,11 @@ const links = [
     Icon: User,
     to: "/skeleton",
   },
+  {
+    label: "Tabs",
+    Icon: User,
+    to: "/tabs",
+  },
 ] satisfies Link[];
 
 type LayoutProps = { children: React.ReactNode };

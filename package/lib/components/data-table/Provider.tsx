@@ -12,6 +12,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Dispatch } from "react";
+import { SetStateAction } from "react";
 
 type DataTableStateContext<TData> = {
   table: Table<TData>;
@@ -35,16 +37,25 @@ export function useDataTableContext<TData>() {
   return context as DataTableStateContext<TData>;
 }
 
+type State<S> = [S, Dispatch<SetStateAction<S>>];
+
 type DataTableProviderProps<TData, TValue> = DataTableProps<TData, TValue> & {
   children: React.ReactNode;
+  sortingState?: State<SortingState>;
+  columnFiltersState?: State<ColumnFiltersState>;
+  columnVisibilityState?: State<VisibilityState>;
+  rowSelectionState?: State<RowSelectionState>;
 };
 export function DataTableProvider<TData, TValue>(props: DataTableProviderProps<TData, TValue>) {
   const { columns, data } = props;
 
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
+  const [sorting, setSorting] = props.sortingState ?? useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] =
+    props.columnFiltersState ?? useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] =
+    props.columnVisibilityState ?? useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] =
+    props.rowSelectionState ?? useState<RowSelectionState>({});
 
   const state = { sorting, columnFilters, columnVisibility, rowSelection };
 
