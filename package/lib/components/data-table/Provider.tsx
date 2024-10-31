@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from "react";
 import { DataTableProps } from "./types";
 import {
   ColumnFiltersState,
+  PaginationState,
   RowSelectionState,
   SortingState,
   Table,
@@ -45,6 +46,7 @@ type DataTableProviderProps<TData, TValue> = DataTableProps<TData, TValue> & {
   columnFiltersState?: State<ColumnFiltersState>;
   columnVisibilityState?: State<VisibilityState>;
   rowSelectionState?: State<RowSelectionState>;
+  paginationState?: State<PaginationState>;
 };
 export function DataTableProvider<TData, TValue>(props: DataTableProviderProps<TData, TValue>) {
   const { columns, data } = props;
@@ -56,8 +58,10 @@ export function DataTableProvider<TData, TValue>(props: DataTableProviderProps<T
     props.columnVisibilityState ?? useState<VisibilityState>({});
   const [rowSelection, setRowSelection] =
     props.rowSelectionState ?? useState<RowSelectionState>({});
+  const [pagination, setPagination] =
+    props.paginationState ?? useState<PaginationState>({ pageIndex: 0, pageSize: 10 });
 
-  const state = { sorting, columnFilters, columnVisibility, rowSelection };
+  const state = { sorting, columnFilters, columnVisibility, rowSelection, pagination };
 
   const table = useReactTable({
     data,
@@ -70,6 +74,7 @@ export function DataTableProvider<TData, TValue>(props: DataTableProviderProps<T
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    onPaginationChange: setPagination,
     state,
   });
 
